@@ -72,6 +72,8 @@ def restart_fz_r(request):
             #lt2 = RestartJobs.objects.get(id=int(resid))
             #restarttime = lt2.restarttime.strftime("%Y-%m-%d %H:%M:%S")
             return HttpResponse(jids)
+        else:
+            return HttpResponse('restart failed!')
 
 def testt(request):
     return render(request, 'lhasa/testt2.html', locals())

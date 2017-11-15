@@ -1,3 +1,5 @@
+注：由于在本机上salt必须运行在root 用户下，故而pycharm与之对应的virtualenv环境也必须是在root用户下的
+
 安装
 	pycharm
 		https://www.cnblogs.com/IDRI/p/6354237.html	如何在pycharm中使用配置好的virtualenv环境

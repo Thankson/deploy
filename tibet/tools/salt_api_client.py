@@ -18,6 +18,7 @@ def restart_job_vir_salt(projects):
           for line in lines:
                if project == line.split()[0]:
                     target = line.split()[1]
+                    # jid = local.cmd_async(target, 'cmd.run', ['/opt/deploy.sh %s'%project])
                     jid = local.cmd_async(target, 'cmd.run', ['/opt/deploy.sh %s'%project])
           jids.append(jid)
      return jids

@@ -1,0 +1,1 @@
+这个脚本是为了生成 server_status.json 文件的，做成一个linux定时任务，每10分钟执行一次。

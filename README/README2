@@ -1,0 +1,32 @@
+安装
+	pycharm
+		https://www.cnblogs.com/IDRI/p/6354237.html	如何在pycharm中使用配置好的virtualenv环境
+	# chrome
+	lantern
+	# sublime
+		https://www.sublimetext.com/docs/3/linux_repositories.html#apt
+	virtualbox
+#######################################################################################################################################
+cli
+	sudo apt-get install vim
+	sudo apt-get install openssh-server
+	sudo apt-get install mysql-server
+	salt-master
+		https://repo.saltstack.com/#ubuntu
+
+	sudo apt install python-pip
+	sudo apt-get install python-virtualenv
+		pip install django
+		pip install mysql-python
+			see: http://www.jb51.net/article/87364.htm
+			first: sudo apt-get install libmysqlclient-dev
+			second: sudo apt-get install python-dev
+		pip install requests
+		https://stackoverflow.com/questions/3371136/revert-the-no-site-packages-option-with-virtualenv		Revert the `--no-site-packages` option with virtualenv{让virtualenv环境可以使用全局环境中的python包}
+#######################################################################################################################################
+django
+	create database tibet;
+	grant all privileges on tibet.* to 'ops'@'%' identified by 'ops';
+	FLUSH PRIVILEGES;
+	python manage.py makemigrations
+	python manage.py migrate

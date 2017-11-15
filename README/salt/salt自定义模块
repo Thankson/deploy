@@ -1,0 +1,25 @@
+默认模块路径：/srv/salt/_modules
+调用方法：salt '*' 文件名.函数名
+同步编写的模块到minion：
+	salt '*' state.apply
+	salt '*' saltutil.sync_modules
+	salt '*' saltutil.sync_all
+
+编写自定义模块
+自己编写的modules来调用salt自带的modules，调用方法如下：
+	1 salt 提供了一个dict __salt__
+	2 调用cmd.run模块，则为__salt__['cmd.run']
+	3 传入参数a，则为__salt__['cmd.run']['a']
+__virtual__:
+	1 string:该string为模块名
+	2 True：默认模块名
+	3 False：模块加载失败
+	4 False，error_str:加载失败并返回error_str
+编写：
+vim /srv/salt/_modules/test.py
+def test():                                                            
+    return 'Hello World. This is test custom modules'
+同步：
+salt '*' saltutil.sync_modules
+调用:
+salt '*' test.test

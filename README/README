@@ -1,0 +1,4 @@
+sudo apt-get install salt-master salt-api
+sudo apt-get install Mysql-python
+
+# sudo pip install python-jenkins

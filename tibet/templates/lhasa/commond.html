@@ -1,0 +1,43 @@
+{% extends 'snippet/layout.html' %}
+
+{% load staticfiles %}
+
+{% block title %}执行命令{% endblock %}
+
+{% block module %}执行命令{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-lg-23 col-md-6">
+            <div class="panel panel-primary">
+                <div class="modal-body" id='modal_body'>
+                    <form class="form-inline" id='form_commond' action="#">{% csrf_token %}
+                        <div class="form-group">
+                            <input class="form-control" name="target" placeholder="target">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="modules" placeholder="modules">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="args" placeholder="args">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="kwargs" placeholder="kwargs">
+                        </div>
+                        <br/>
+                        <button type="button" id='commond' class="btn btn-success ">执行</button>
+                    </form>
+                    <div id="tishi"><strong id="things"></strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+    <script src="{% static "js/ops.js" %}"></script>
+
+{% endblock %}

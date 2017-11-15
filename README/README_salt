@@ -1,0 +1,9 @@
+参考（http://outofmemory.cn/code-snippet/35550/saltstack-kill-job-with-saltutil.term_job-command）
+saltstack在minion端执行任务时，有时候会出现问题，比如hang住了，不结束了。
+比如我们执行下面的salt命令：
+salt '*' cmd.run 'ping outofmemory.cn'
+ping outofmemory.cn这个命令在linux下会不停的ping，我们没有给-c 4的参数，这时候我们就需要结束此命令。
+首先需要先找到这个任务的job_id，可以通过在master端运行：
+salt-run jobs.active
+显示当前活动的任务id，例如： 20141230094047407913 这时候我们就可以执行一个salt命令来结束这个job了。
+salt '*' saltutil.term_job 20141230094047407913

@@ -1,0 +1,163 @@
+{% extends 'snippet/layout.html' %}
+
+{% load staticfiles %}
+
+{% block title %}重启仿真{% endblock %}
+
+{% block module %}重启仿真{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-lg-8  pull-left">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-heading">
+                        <i class="fa  fa-cubes fa-fw"></i> 工程选项
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-inline" id='form_restart'  method="POST" action="#">{% csrf_token %}
+                            <div class="form-group">
+                                <label>工程</label>
+                                <textarea class="form-control" rows="3" name="project"></textarea>
+                            </div>
+                            <br/>
+
+                            <div class="form-group" id="projectss">
+
+                            </div>
+                            <br/>
+
+
+                            <div class="form-group">
+                                <label>备注</label>
+                                <input class="form-control" name="note" placeholder="请填写备注信息">
+                            </div>
+                            <br/>
+                            <button type="button" id='restart_info' class="btn btn-success ">commit</button>
+                        </form>
+                        <div><strong id="things"></strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-4 pull-right">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i> 重启消息
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="list-group">
+
+                        {% for res in get_all_restart %}
+                            <a href="#" class="list-group-item">
+                            {% if res.operator %}
+                                <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>&nbsp{{ applicant }}&nbsp申请已通过 &nbsp{{ res.projects }}&nbsp 等
+                                <span class="pull-right text-muted small">&nbsp&nbsp<em>4 minutes ago</em></span>
+                            {% else %}
+                                <button type="button" class="btn btn-default btn-circle" id="restart_btn" res_id="{{ res.id }}"><i class="fa fa-link"></i></button>&nbsp{{ applicant }} &nbsp申请重启&nbsp {{ res.projects }} &nbsp 等
+                                <span class="pull-right text-muted small">&nbsp&nbsp<em>4 minutes ago</em></span>
+                            {% endif %}
+                            </a>
+                        {% endfor %}
+
+                        <a href="#" class="list-group-item">
+                            <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>***已重启 vst_bak 等
+                            <span class="pull-right text-muted small"><em>view details</em>&nbsp&nbsp<em>4 minutes ago</em></span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-comment fa-fw"></i> New Comment
+                            <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                            </span>
+                        </a>
+                    </div>
+                    <!-- /.list-group -->
+                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+    <script src="{% static "sb/vendor/jquery/jquery.min.js" %}"></script>
+
+    <script>
+
+    var MYAPP = {};
+    MYAPP.pros = 'mypros';
+
+    $(function(){
+        $.getJSON("projects",function(data){
+            //alert('aaaste');
+            var $jsontip = $("#projectss");
+            var strHtml = "";//存储数据的变量
+            $jsontip.empty();//清空内容
+                strHtml += "<label>或者选择&nbsp：</label>"
+            $.each(data.data1,function(infoIndex,info){
+                //strHtml += "<a href='" + info["url"] + "' target='_blank'><img src='" + info["img"] + "' /></a>";
+                strHtml += "<div class='checkbox'><label><input type='checkbox' value='" + info + "' name='pro'>" + info + "</label></div>&nbsp&nbsp&nbsp&nbsp";
+            })
+            MYAPP.pros = data.data1
+            $jsontip.html(strHtml);//显示处理后的数据
+        })
+    })
+
+    //去除数组中的空值
+    function trimSpace(array){
+         for(var i = 0 ;i<array.length;i++)
+         {
+             if(array[i] == "" || typeof(array[i]) == "undefined")
+             {
+                      array.splice(i,1);
+                      i= i-1;
+             }
+         }
+         return array;
+    }
+
+
+
+    $('#restart_info').click(function(){
+        //alert(MYAPP.pros);
+        //alert($("textarea[name='project']").val());
+        var textarea_val;
+        textarea_val = $("textarea[name='project']").val();
+        var respro;
+        respro = textarea_val.split(/[, \t\n]/);
+        trimSpace(respro);
+        var i, x;
+        for (i=0; i<respro.length;i++){
+            dbi = respro[i];
+            if (MYAPP.pros.indexOf(dbi) == -1){
+                alert('错误工程名' + dbi);
+                return
+            }
+        }
+        var linkk;
+        linkk = "/restart_fz_shenqing"
+        $.post(linkk, $("#form_restart").serialize(), function(data){
+            $('#things').html(data);
+        });
+    });
+
+
+
+
+    $('#restart_btn').click(function(){
+        var resid;
+        resid = $(this).attr("res_id");
+        $.get('/restart_fz/restart', {resid:resid}, function(data){
+            alert(data);
+        });
+    });
+
+    </script>
+{% endblock %}

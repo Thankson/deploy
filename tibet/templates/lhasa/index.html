@@ -1,0 +1,303 @@
+{% extends 'snippet/layout.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Index{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block module %}控制台{% endblock %}
+
+{% block main %}
+    <!-- /.row -->
+    <div class="row" style='margin-top:20px'>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-support fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" id="down">0</div>
+                            <div>未连接机器!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" id="downmachine">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge" id="up">0</div>
+                            <div>连接机器!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" id="upmachine">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-comments fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">2</div>
+                            <div>任务编排</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/job">
+                    <div class="panel-footer">
+                        <span class="pull-left">查看全部</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-users fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">1</div>
+                            <div>在线用户</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">{{login_user}}</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    实时监控
+                </div>
+                <div class="panel-body" id='demo2' style='height:400px;'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <h1 class="page-header">Blank</h1> -->
+    <!-- /.row -->
+
+{% endblock %}
+
+{% block script %}
+
+    <script src="{% static "sb/vendor/jquery/jquery.min.js" %}"></script>
+
+    <script>
+        $(function(){
+            $.getJSON("serverstatus",function(data){
+                var $jsondown = $("#down");
+                var $jsonup = $("#up");
+                var strHtmldown = "";//存储数据的变量
+                var strHtmlup = "";//存储数据的变量
+                var strHtmldownname = "";//存储数据的变量
+                var strHtmlupname = "";//存储数据的变量
+                $jsondown.empty();//清空内容
+                $jsonup.empty();//清空内容
+                //alert('aaaaaa');
+                //alert(data[0].url);
+                //$.each(data,function(infoIndex,info){
+                //alert(info['url']);
+                //strHtml += "<a href='" + info["url"] + "' target='_blank'><img src='" + info["img"] + "' /></a>";
+                strHtmldown = data.down.length;
+                strHtmlup = data.up.length;
+                now_time = data.now_time
+
+                strHtmldownname += now_time + "\n\n";
+                $.each(data["down"],function(infoIndex,info){
+                strHtmldownname +=  info + "\n";
+                })
+                strHtmlupname += now_time + "\n\n";
+                $.each(data["up"],function(infoIndex,info){
+                strHtmlupname +=  info + "\n";
+                })
+                $jsondown.html(strHtmldown);//显示处理后的数据
+                $jsonup.html(strHtmlup);//显示处理后的数据
+                $("#downmachine").click(function ()  {
+                    alert(strHtmldownname);
+                })
+                $("#upmachine").click(function ()  {
+                    alert(strHtmlupname);
+                })
+            })
+        })
+    </script>
+
+
+
+
+    <script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>
+
+    <script>
+    var demo2 = echarts.init(document.getElementById('demo2'));
+    var option2= {
+        title : {
+            text: '动态数据',
+            subtext: '访问pv状态'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['监控数据1', '监控数据2']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        dataZoom : {
+            show : false,
+            start : 0,
+            end : 100
+        },
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : true,
+                data : (function (){
+                    var now = new Date();
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                        now = new Date(now - 2000);
+                    }
+                    return res;
+                })()
+            },
+            {
+                type : 'category',
+                boundaryGap : true,
+                data : (function (){
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.push(len + 1);
+                    }
+                    return res;
+                })()
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                scale: true,
+                name : 'y1',
+                boundaryGap: [0.2, 0.2]
+            },
+            {
+                type : 'value',
+                scale: true,
+                name : 'y2',
+                boundaryGap: [0.2, 0.2]
+            }
+        ],
+        series : [
+            {
+                name:'监控数据2',
+                type:'bar',
+                xAxisIndex: 1,
+                yAxisIndex: 1,
+                data:(function (){
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.push(Math.round(Math.random() * 1000));
+                    }
+                    return res;
+                })()
+            },
+            {
+                name:'监控数据1',
+                type:'line',
+                data:(function (){
+                    var res = [];
+                    var len = 10;
+                    while (len--) {
+                        res.push((Math.random()*10 + 5).toFixed(1) - 0);
+                    }
+                    return res;
+                })()
+            }
+        ]
+    };
+    var lastData = 11;
+    var axisData;
+    var timeTicket
+    clearInterval(timeTicket);
+    timeTicket = setInterval(function (){
+        lastData += Math.random() * ((Math.round(Math.random() * 10) % 2) == 0 ? 1 : -1);
+        lastData = lastData.toFixed(1) - 0;
+        axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+
+        // 动态数据接口 addData
+        demo2.addData([
+            [
+                0,        // 系列索引
+                Math.round(Math.random() * 1000), // 新增数据
+                true,     // 新增数据是否从队列头部插入
+                false     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+            ],
+            [
+                1,        // 系列索引
+                lastData, // 新增数据
+                false,    // 新增数据是否从队列头部插入
+                false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+                axisData  // 坐标轴标签
+            ]
+        ]);
+    }, 5100);
+
+    demo2.setOption(option2);
+
+    </script>
+{% endblock %}

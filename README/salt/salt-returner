@@ -1,0 +1,72 @@
+https://docs.saltstack.com/en/latest/ref/returners/		FULL LIST OF RETURNERS[salt-returner]
+	https://docs.saltstack.com/en/latest/ref/returners/all/salt.returners.mysql.html	SALT.RETURNERS.MYSQL	[1]
+		yum install mysql-server	//仅master端执行
+		yum install MySQL-python	//所有minion端执行
+		grant all on salt.* to salt@'192.168.56.0/255.255.255.0' identified by 'salt';
+		http://www.cnblogs.com/aguncn/p/4755714.html	将SALT_STACK的JOB-CACHE放到数据库中，而建库用DJANGO的ORM完成
+	https://docs.saltstack.com/en/latest/ref/returners/all/salt.returners.django_return.html	SALT.RETURNERS.DJANGO_RETURN
+		https://docs.djangoproject.com/en/dev/topics/signals/	django Signals
+
+
+示例：
+[1]
+1 yum install mysql-server	//仅master端执行 ,然后重启mysql
+2 yum install MySQL-python	//所有minion端执行，然后重启salt-minion
+3 vim /etc/salt/master		//仅master端执行，然后重启salt-master
+mysql.host: 'salt'
+mysql.user: 'salt'
+mysql.pass: 'salt'
+mysql.db: 'salt'
+mysql.port: 3306
+4 Use the following mysql database schema:(or http://www.cnblogs.com/aguncn/p/4755714.html)
+CREATE DATABASE  `salt`
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
+USE `salt`;
+
+--
+-- Table structure for table `jids`
+--
+
+DROP TABLE IF EXISTS `jids`;
+CREATE TABLE `jids` (
+  `jid` varchar(255) NOT NULL,
+  `load` mediumtext NOT NULL,
+  UNIQUE KEY `jid` (`jid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE INDEX jid ON jids(jid) USING BTREE;
+
+--
+-- Table structure for table `salt_returns`
+--
+
+DROP TABLE IF EXISTS `salt_returns`;
+CREATE TABLE `salt_returns` (
+  `fun` varchar(50) NOT NULL,
+  `jid` varchar(255) NOT NULL,
+  `return` mediumtext NOT NULL,
+  `id` varchar(255) NOT NULL,
+  `success` varchar(10) NOT NULL,
+  `full_ret` mediumtext NOT NULL,
+  `alter_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  KEY `id` (`id`),
+  KEY `jid` (`jid`),
+  KEY `fun` (`fun`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `salt_events`
+--
+
+DROP TABLE IF EXISTS `salt_events`;
+CREATE TABLE `salt_events` (
+`id` BIGINT NOT NULL AUTO_INCREMENT,
+`tag` varchar(255) NOT NULL,
+`data` mediumtext NOT NULL,
+`alter_time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+`master_id` varchar(255) NOT NULL,
+PRIMARY KEY (`id`),
+KEY `tag` (`tag`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+5 salt '*' test.ping --return mysql

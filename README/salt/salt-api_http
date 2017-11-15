@@ -1,0 +1,51 @@
+http://www.awkxy.com/archives/776	简单的整合saltstack与django,实现salt自动化运维[salt-api]  ***
+
+http://www.imooc.com/learn/853      视频教程
+
+配置API(在salt-master上执行)[ http://blog.csdn.net/qq942477618/article/details/53437004 ]
+	1 安装salt-api
+		yum install -y salt-api         //chkconfig salt-api on
+		                                //service salt-master restart           service salt-api start（注：重启salt-api后token改变）
+	2 添加调用API用户	//权限管理
+		useradd -M test && passwd test		//id test ，查看创建的用户信息
+	3 生成加密证书 ssl
+		salt-call --local tls.create_self_signed_cert	//生成的证书是：ls /etc/pki/tls/certs/localhost.crt
+	4 修改配置文件
+		vim /etc/salt/master
+rest_cherrypy:    
+  port: 8000   
+  debug: True  
+  ssl_crt: /etc/pki/tls/certs/localhost.crt    
+  ssl_key: /etc/pki/tls/certs/localhost.key  
+external_auth:    
+  pam:    
+    test:              
+      - .*  
+      - '@wheel'  
+      - '@runner'  
+	  - test.*			//限制控制粒度，仅可通过此api调用test模块的方法
+	  - cmd.*			//限制控制粒度，仅可通过此api调用cmd模块的方法
+	  - cmd.run			//限制控制粒度，仅可通过此api调用cmd.run方法
+	5 登陆获取到token：
+curl -sSk https://localhost:8000/login \  
+  -H 'Accept: application/x-yaml' \
+  -d username=test \
+  -d password=test \
+  -d eauth='pam'	
+    6 利用步骤5获取的token执行命令
+curl -sSk https://localhost:8000 \
+  -H 'Accept: application/x-yaml' \
+  -H 'X-Auth-Token: ab3749a9a0fe83386b8a5d558d10e346c252e336' \
+  -d client=local \
+  -d tgt='*' \
+  -d fun=test.ping
+	7 API功能介绍
+		/
+		/login
+		/logout
+		/minions	//获取minion信息（get方法）或执行命令（post方法）
+		/jobs		//获取jobs相关信息（get方法）
+		/run		//runner相关（post方法）
+		/events		//获取events相关信息
+		/ws			//建立一个websocket，获取event相关信息（为了克服http短链，而实现的长链）
+		/stats		//获取API server相关信息

@@ -3,7 +3,16 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from django.contrib.auth.models import AbstractUser
+
 # Create your models here.
+class OpsUser(AbstractUser):
+
+    nickname = models.CharField(max_length=200, null=True, blank=True)
+    avatar = models.CharField(max_length=200, null=True, blank=True)
+    self_intro = models.CharField(max_length=500, null=True, blank=True)
+    updated = models.DateTimeField(null=True, blank=True)
+    sina = models.CharField(max_length=200, null=True, blank=True)
 
 class RestartManager(models.Manager):
     def get_all_restart_by_time(self):
@@ -25,6 +34,8 @@ class RestartJobs(models.Model):
         ordering = ['-applitime']
     objects = RestartManager()
 
+
+### belows are salt_about
 class jids(models.Model):
     jid = models.CharField(max_length=255, unique=True)
     load = models.TextField(max_length=1024)

@@ -150,3 +150,21 @@ STATIC_PATH = os.path.join(BASE_DIR, 'tibet/static')
 STATICFILES_DIRS = (
     STATIC_PATH,
 )
+
+LOGIN_URL = '/login/'
+
+
+RESERVED = ["user", "topic", "home", "setting", "forgot", "login", "logout", "register", "admin"]
+
+AUTHENTICATION_BACKENDS = ('tibet.backends.EmailAuthBackend',)
+
+## send email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER= 'zengqingwen616@163.com'
+EMAIL_HOST_PASSWORD= 'wen616'
+DEFAULT_FROM_EMAIL = 'zengqingwen616@163.com'
+
+
+AUTH_USER_MODEL = 'tibet.OpsUser'

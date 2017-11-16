@@ -14,6 +14,7 @@ cli
 	sudo apt-get install openssh-server
 	sudo apt-get install mysql-server
 	salt-master
+	    sudo apt-get install salt-master salt-api
 		https://repo.saltstack.com/#ubuntu
 
 	sudo apt install python-pip
@@ -24,6 +25,7 @@ cli
 			first: sudo apt-get install libmysqlclient-dev
 			second: sudo apt-get install python-dev
 		pip install requests
+		pip install pillow      // tibet/views/user.py中引入 import PIL(数据表的加照片要用到PIL包)
 		https://stackoverflow.com/questions/3371136/revert-the-no-site-packages-option-with-virtualenv		Revert the `--no-site-packages` option with virtualenv{让virtualenv环境可以使用全局环境中的python包}
 #######################################################################################################################################
 django
@@ -32,3 +34,14 @@ django
 	FLUSH PRIVILEGES;
 	python manage.py makemigrations
 	python manage.py migrate
+	python manage.py createsuperuser
+	    admin   sa123456
+#######################################################################################################################################
+用脚本sh 以root用户权限来启动pycharm
+	vim pycharm_root.sh
+		#!/bin/bash
+		echo "yourpassword" | sudo -S /home/zengqingwen/下载/pycharm-2017.2.4/bin/pycharm.sh
+	将pycharm_root.sh脚本设置成可以双击运行（参考：http://blog.csdn.net/youyudexiaowangzi/article/details/48707059）：
+		× 输入dconf-editor，然后回车。如果没有安装dconf-editor系统会提示你进行安装，然后可以再次输入dconf-editor，然后会出现一个窗口用来修改
+		× 左侧栏中找到org->gnome->nautilus->preferences，然后右边会有executable-text-activation选项，默认是display，改为ask之后关闭窗口即可。
+		× 再次双击bash文件之后系统就会弹出对话框供你选择，是diskplay还是run in terminal还是run.选择你想要的就行了

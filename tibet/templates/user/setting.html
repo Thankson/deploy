@@ -1,0 +1,81 @@
+{% extends 'snippet/layout.html' %}
+
+{% load staticfiles %}
+
+{% load ops_extras %}
+
+{% block title %}Login{% endblock %}
+
+{% block main %}
+    <div>
+        <form action='' method="POST">
+            <fieldset>
+                <div>
+                    <legend>用户信息设置</legend>
+                </div>
+                {% if success_message %}
+                <ul>
+                    <li>{{ success_message }}</li>
+                </ul>
+                {% endif %}
+                {{ errors|dump_errors }}
+                <div>
+                    <!-- Avatar -->
+                    <label>头像</label>
+                    <div>
+                        <img src="/static/avatar/b_{% if user.avatar %}{{ user.avatar }}{% else %}default.png{% endif %}?t={% gen_random %}" alt="" />
+                        <img src="/static/avatar/m_{% if user.avatar %}{{ user.avatar }}{% else %}default.png{% endif %}?t={% gen_random %}" alt="" />
+                        <img src="/static/avatar/s_{% if user.avatar %}{{ user.avatar }}{% else %}default.png{% endif %}?t={% gen_random %}" alt="" />
+                        <a href="/setting/avatar/">设置头像</a>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Username -->
+                    <label>用户名</label>
+                    <div>
+                        <input type="text" id="username" name="username" placeholder="" value="{% if user.username %}{{ user.username }}{% endif %}" readonly>
+                        <p>用户名由字母开头，只能含有字母、数字或者下划线</p>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- E-mail -->
+                    <label>E-mail</label>
+                    <div>
+                        <input type="text" id="email" name="email" placeholder="" value="{% if user.email %}{{ user.email }}{% endif %}" readonly>
+                        <p>你的E-mail，便于登录和找回密码</p>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Nickname -->
+                    <label>昵称</label>
+                    <div>
+                        <input type="text" id="nickname" name="nickname" placeholder="" value="{% if user.nickname %}{{ user.nickname }}{% endif %}">
+                        <p>你的昵称，便于其他人更好的认识你</p>
+                    </div>
+                </div>
+
+
+                <div>
+                    <!-- E-mail -->
+                    <label>个人简介：</label>
+                    <div>
+                        <textarea type="text" id="self_intro" name="self_intro" placeholder="">{% if user.self_intro %}{{ user.self_intro }}{% endif %}</textarea>
+                        <p>可以稍微详细的介绍自己。</p>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Button -->
+                    <div>
+                        <button>保存改动</button>
+                        <a href="{% url 'set_passwd' %}">设置密码</a>
+                    </div>
+                </div>
+            </fieldset>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

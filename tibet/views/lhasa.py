@@ -75,6 +75,13 @@ def restart_fz_r(request):
         else:
             return HttpResponse('restart failed!')
 
+
+def get_midd_deploy(request):
+    return render(request, 'lhasa/midd_deploy.html', locals())
+
+def post_midd_deploy(request):
+    pass
+
 def testt(request):
     return render(request, 'lhasa/testt2.html', locals())
 

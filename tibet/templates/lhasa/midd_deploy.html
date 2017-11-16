@@ -1,0 +1,72 @@
+{% extends 'snippet/layout.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Index{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block module %}仿真中间件部署{% endblock %}
+
+{% block main %}
+
+    <div class="col-lg-4  pull-left">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-heading">
+                <i class="fa  fa-cubes fa-fw"></i> 工程选项
+            </div>
+            <div class="panel-body">
+                <br class="form-inline" id='form_restart'  method="POST" action="#">{% csrf_token %}
+                    <div class="form-group">
+                        <label>安装地址</label>
+                        <input class="form-control" name="note" placeholder="请填写需要安装机器的 salt_minion[ID]">
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>中间件</label>
+                            <select class="form-control">
+                                <option>redis</option>
+                                <option>dubbo</option>
+                                <option>nginx</option>
+                                <option>mongo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>是否集群</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">是
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked>否
+                            </label>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="form-group">
+                        <label>备注</label>
+                        <input class="form-control" name="note" placeholder="请填写备注信息">
+                    </div>
+                    <br/>
+                    <button type="button" id='restart_info' class="btn btn-success ">commit</button>
+                </form>
+                <div><strong id="things"></strong></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+
+{% endblock %}
+
+

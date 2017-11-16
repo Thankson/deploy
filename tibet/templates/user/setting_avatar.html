@@ -1,0 +1,48 @@
+{% extends 'snippet/layout.html' %}
+
+{% load staticfiles %}
+
+{% load ops_extras %}
+
+{% block title %}Login{% endblock %}
+
+{% block main %}
+    <div>
+        <form action='' method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <div>
+                    <legend>用户头像设置</legend>
+                </div>
+                {{ errors|dump_errors }}
+                <div>
+                    <!-- Avatar -->
+                    <label>头像</label>
+                    <div>
+                        <img src="/static/avatar/b_{% if user.avatar %}{{ user.avatar }}{% else %}default.png{% endif %}?t={% gen_random %}" alt="" />
+                        <img src="/static/avatar/m_{% if user.avatar %}{{ user.avatar }}{% else %}default.png{% endif %}?t={% gen_random %}" alt="" />
+                        <img src="/static/avatar/s_{% if user.avatar %}{{ user.avatar }}{% else %}default.png{% endif %}?t={% gen_random %}" alt="" />
+                        <a href="/setting/avatar/">设置头像</a>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Avatar-->
+                    <label>上传</label>
+                    <div>
+                        <input type="file" id="avatar" name="avatar" placeholder="">
+                        <p>请选择要上传的头像文件</p>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Button -->
+                    <div>
+                        <button>保存改动</button>
+                        <a href="{% url 'setting' %}">返回设置页</a>
+                    </div>
+                </div>
+            </fieldset>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'snippet/layout.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Members{% endblock %}
+
+{% block stylesheet %}
+    <style>
+    #main{width:auto;height:auto;}
+    #left{width:40%;height:600px;}
+    #right{width:60%;height:600px;}
+    #left,#right{float:left;}
+</style>
+{% endblock %}
+
+
+{% block main %}
+
+<div id="main">
+    <div id="left">
+        <div>
+            <span>平台活跃成员</span>
+        </div>
+        <div>
+            {% for member in active_members %}
+                <div>
+                    <a href="/u/{{ member.username }}/">
+                        <img src="/static/avatar/m_{% if member.avatar %}{{ member.avatar }}{% else %}default.png{% endif %}" alt="" />
+                    </a>
+                    <span>
+                        <a href="/u/{{ member.username }}/">{{ member.username }}</a>
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br>
+
+    <div id="right">
+        <div>
+            <span>最新加入成员</span>
+        </div>
+        <div>
+            {% for member in members %}
+                <div>
+                    <a href="/u/{{ member.username }}/">
+                        <img src="/static/avatar/m_{% if member.avatar %}{{ member.avatar }}{% else %}default.png{% endif %}" alt="" />
+                    </a>
+                    <span>
+                        <a href="/u/{{ member.username }}/">{{ member.username }}</a>
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

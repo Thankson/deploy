@@ -1,0 +1,41 @@
+{% extends 'snippet/layout.html' %}
+
+{% load ops_extras %}
+
+
+{% block main %}
+    <div>
+        <form action='' method="POST">
+            <fieldset>
+                <div>
+                    <legend>登录</legend>
+                </div>
+                {{ errors|dump_errors }}
+                <div>
+                    <label>E-mail</label>
+                    <div>
+                        <input type="text" id="email" name="email" placeholder="please input your email">
+                        <p>请输入您注册时所填邮箱</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label>密码</label>
+                    <div>
+                        <input type="password" id="password" name="password" placeholder="please input your password">
+                        <p>请输入您的密码（不少于4个字符）</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <button>登录</button>
+                        <a href="/register/">注册账号</a>
+                        <a href="/forgot/">忘记密码了</a>
+                    </div>
+                </div>
+            </fieldset>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}

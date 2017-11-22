@@ -113,6 +113,8 @@
                         <li>
                             <a href="#"><i class="fa fa-steam fa-fw"></i> 仿真环境自动化部署（包括各种中间件部署、tomcat工程部署、jar工程部署）</a>
                         </li>
+
+                        {% if perms.can_view_url %}
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> 配置管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -125,6 +127,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        {% endif %}
 
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> 文档<span class="fa arrow"></span></a>

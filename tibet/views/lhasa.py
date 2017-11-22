@@ -13,9 +13,26 @@ from tibet.models import RestartJobs, MiddwearDeploy
 
 import datetime
 
+from django.contrib.auth.decorators import permission_required
+
+######################################
+# from django.contrib.auth.models import Permission
+# from django.contrib.contenttypes.models import ContentType
+#
+#
+#
+# url_content_type = ContentType.objects.create(model='unused')
+#
+# can_view_url = Permission.objects.create(name='can view url', content_type=url_content_type,codename='can_view_url')
+
+
+######################################
+
+
 def index(request):
     return render(request, 'lhasa/index.html', locals())
 
+#@permission_required('can_view_url', login_url='/login/')
 def commond(request):
     return render(request, 'lhasa/commond.html', locals())
 
@@ -27,6 +44,7 @@ def commondexe(request):
     res = saltCmd(target, fun, args, kwargs)
     return HttpResponse(res)
 
+#@permission_required('tibet.change_group', login_url='/login/')
 def restart_fz(request):
     applicant = '小明'
     pro = 'vst_back'
@@ -108,13 +126,19 @@ def restart_fz_r(request):
         else:
             return HttpResponse('restart failed!')
 
-
+#@permission_required('tibet.change_group', login_url='/login/')
 def get_midd_deploy(request):
     return render(request, 'lhasa/midd_deploy.html', locals())
+
 
 def post_midd_deploy(request):
     # pro_name2 = request.POST.getlist('pro', '')
     user = request.user
+    print user
+    print 'a'
+    #print request.user.groups.name
+    print user.has_perm('tibet.change_group')
+    #group = groups.objects.all()
     minion_id = request.POST.get('minion_id', '')
     middware = request.POST.get('middware', '')
     edition = request.POST.get('edition', '')

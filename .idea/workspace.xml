@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/tibet/models.py" line="36" />
+    <bookmark url="file://$PROJECT_DIR$/tibet/models.py" line="47" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a33cdf7-35b5-4ba4-b8d5-34d7f21f4e6a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tibet/templates/docs/manual.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tibet/tools/salt_http_api_async.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tibet/views/docs.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README/README3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README/README2" afterPath="$PROJECT_DIR$/README/README2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README/README_salt" afterPath="$PROJECT_DIR$/README/README_salt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/admin.py" afterPath="$PROJECT_DIR$/tibet/admin.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/models.py" afterPath="$PROJECT_DIR$/tibet/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/lhasa/machine_status.html" afterPath="$PROJECT_DIR$/tibet/templates/lhasa/machine_status.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html" afterPath="$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/lhasa/testt.html" afterPath="$PROJECT_DIR$/tibet/templates/lhasa/testt.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/lhasa/testt2.html" afterPath="$PROJECT_DIR$/tibet/templates/lhasa/testt2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html" afterPath="$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/snippet/layout.html" afterPath="$PROJECT_DIR$/tibet/templates/snippet/layout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/urls.py" afterPath="$PROJECT_DIR$/tibet/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/views/lhasa.py" afterPath="$PROJECT_DIR$/tibet/views/lhasa.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,21 +29,75 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tibet/urls.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tibet/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="27" />
+            <state relative-caret-position="162">
+              <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lhasa.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tibet/views/lhasa.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+              <folding>
+                <element signature="e#26#61#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README3" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README/README3">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tibet/templates/snippet/layout.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="535">
+              <caret line="129" column="35" lean-forward="false" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="restart_fz.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="midd_deploy.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="667">
+              <caret line="103" column="58" lean-forward="false" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/deploy/urls.py">
+        <entry file="file://$PROJECT_DIR$/tibet/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="20" column="20" lean-forward="false" selection-start-line="20" selection-start-column="7" selection-end-line="20" selection-end-column="20" />
+            <state relative-caret-position="361">
+              <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -58,70 +106,30 @@
       <file leaf-file-name="README2" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README/README2">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+            <state relative-caret-position="510">
+              <caret line="73" column="87" lean-forward="false" selection-start-line="73" selection-start-column="87" selection-end-line="73" selection-end-column="87" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tibet/models.py">
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tibet/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/deploy/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README_salt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README/README_salt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lhasa.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tibet/views/lhasa.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="91" column="42" lean-forward="false" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
+            <state relative-caret-position="252">
+              <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
               <folding>
-                <element signature="e#26#61#0" expanded="true" />
+                <element signature="e#24#63#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="salt_api_client.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tibet/tools/salt_api_client.py">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/deploy/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="33" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="salt_http_api_async.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tibet/tools/salt_http_api_async.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="187">
+              <caret line="35" column="32" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -142,15 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>projectss</find>
-      <find>USE_TZ</find>
-      <find>restart_info</find>
-      <find>print</find>
-      <find>BASE_DIR</find>
-      <find>jids</find>
-      <find>vst_order</find>
-      <find>restart_btn</find>
-      <find>restart_job_vir_jenkins</find>
       <find>test_tomcat_project lyo</find>
       <find>settings</find>
       <find>salt</find>
@@ -170,8 +169,17 @@
       <find>midd_deploy</find>
       <find>restart_fz_shenqing</find>
       <find>salt_run</find>
+      <find>AUTHENTICATION_BACKENDS</find>
+      <find>AUTH_USER_MODEL</find>
+      <find>AUTH_USER_MODEL</find>
+      <find>AUTHENTICATION_BACKEND</find>
       <find>projects</find>
       <find>salt_params</find>
+      <find>%s</find>
+      <find>Reques</find>
+      <find>permission_required</find>
+      <find>django.contrib.contenttypes</find>
+      <find>ContentType</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -180,8 +188,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README/salt/salt自定义模块" />
-        <option value="$PROJECT_DIR$/README/salt/salt-api_http" />
         <option value="$PROJECT_DIR$/README/salt/salt-api_client" />
         <option value="$PROJECT_DIR$/tibet/static/js/ops.js" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/commond.html" />
@@ -193,7 +199,6 @@
         <option value="$PROJECT_DIR$/tibet/templates/result_json/projects.json" />
         <option value="$PROJECT_DIR$/tibet/views/result.py" />
         <option value="$PROJECT_DIR$/tibet/tools/utils.py" />
-        <option value="$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html" />
         <option value="$PROJECT_DIR$/tibet/tools/jenkins_api.py" />
         <option value="$PROJECT_DIR$/tibet/tools/restart_job.py" />
         <option value="$PROJECT_DIR$/README/README" />
@@ -219,18 +224,21 @@
         <option value="$PROJECT_DIR$/tibet/templates/user/setting_avatar.html" />
         <option value="$PROJECT_DIR$/tibet/templates/user/setting.html" />
         <option value="$PROJECT_DIR$/tibet/views/docs.py" />
-        <option value="$PROJECT_DIR$/tibet/templates/snippet/layout.html" />
         <option value="$PROJECT_DIR$/tibet/templates/docs/manual.html" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/machine_status.html" />
         <option value="$PROJECT_DIR$/tibet/tools/salt_http_api_async.py" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/testt2.html" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/testt.html" />
         <option value="$PROJECT_DIR$/tibet/urls.py" />
-        <option value="$PROJECT_DIR$/tibet/models.py" />
         <option value="$PROJECT_DIR$/README/README_salt" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html" />
-        <option value="$PROJECT_DIR$/tibet/views/lhasa.py" />
         <option value="$PROJECT_DIR$/README/README2" />
+        <option value="$PROJECT_DIR$/tibet/admin.py" />
+        <option value="$PROJECT_DIR$/tibet/models.py" />
+        <option value="$PROJECT_DIR$/tibet/views/lhasa.py" />
+        <option value="$PROJECT_DIR$/README/README3" />
+        <option value="$PROJECT_DIR$/tibet/templates/snippet/layout.html" />
+        <option value="$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html" />
       </list>
     </option>
   </component>
@@ -294,13 +302,8 @@
               <item name="deploy" type="b2602c69:ProjectViewProjectNode" />
               <item name="deploy" type="462c0819:PsiDirectoryNode" />
               <item name="tibet" type="462c0819:PsiDirectoryNode" />
-              <item name="tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deploy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deploy" type="462c0819:PsiDirectoryNode" />
-              <item name="tibet" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="snippet" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -393,9 +396,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="-4" width="1871" height="1084" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21268453" sideWeight="0.49492016" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21268453" sideWeight="0.49492016" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -430,20 +432,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README/salt/salt-api_client">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README/salt/salt-returner">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README/salt/salt-api_http">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -512,13 +500,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/backends.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -648,13 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/templates/snippet/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="132" column="59" lean-forward="false" selection-start-line="132" selection-start-column="59" selection-end-line="132" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tibet/tools/jenkins_api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -703,22 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1854">
-          <caret line="103" column="58" lean-forward="false" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-612">
-          <caret line="89" column="4" lean-forward="false" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/machine_status.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-990">
@@ -731,32 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/tools/salt_api_client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="33" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/views/lhasa.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="91" column="42" lean-forward="false" selection-start-line="91" selection-start-column="42" selection-end-line="91" selection-end-column="42" />
-          <folding>
-            <element signature="e#26#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -777,26 +709,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README/README2">
+    <entry file="file://$PROJECT_DIR$/tibet/backends.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="38" column="40" lean-forward="false" selection-start-line="38" selection-start-column="40" selection-end-line="38" selection-end-column="40" />
+        <state relative-caret-position="36">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="e#17#91#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tibet/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tibet/tools/salt_api_client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="33" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tibet/models.py">
+    <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="44" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="51" />
+        <state relative-caret-position="667">
+          <caret line="103" column="58" lean-forward="false" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tibet/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/deploy/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="34" column="24" lean-forward="false" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="24" />
+        <state relative-caret-position="187">
+          <caret line="35" column="32" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README/README2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="73" column="87" lean-forward="false" selection-start-line="73" selection-start-column="87" selection-end-line="73" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tibet/views/lhasa.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
+          <folding>
+            <element signature="e#26#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tibet/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README/README3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tibet/templates/snippet/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="129" column="35" lean-forward="false" selection-start-line="129" selection-start-column="35" selection-end-line="129" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>

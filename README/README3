@@ -1,0 +1,39 @@
+django 权限管理:
+
+
+参考：https://segmentfault.com/a/1190000007124746	Django权限使用总结 - 之 不绑定特定的model定义
+参考：http://blog.csdn.net/yongche_shi/article/details/46799567	Django用户认证系统(三)组与权限
+	https://blog.ansheng.me/article/use-the-decorator-for-your-django-view	为你的Django视图使用装饰器
+	http://blog.csdn.net/huochen1994/article/details/52767214	Django自定义用于Views的装饰器
+	http://www.jianshu.com/p/01126437e8a4	Django权限机制的实现
+	https://www.cnblogs.com/skying555/p/5992711.html	Django中的许可（Permissions）和用户组（Group）
+
+
+主要介绍 不绑定特定的model 的权限如何定义：
+ 1 在Terminal 中进入python 终端：依次输入以下：
+>>> import os,django
+>>> os.environ.setdefault("DJANGO_SETTINGS_MODULE", "deploy.settings")# project_name 项目名称
+'deploy.settings'
+>>> django.setup()
+>>> from django.contrib.auth.models import Permission
+>>> from django.contrib.contenttypes.models import ContentType
+>>> url_content_type = ContentType.objects.create(name='url permission', app_label='crashstats', model='unused')
+	如果报错则：url_content_type = ContentType.objects.create(app_label='crashstats', model='unused')
+	或：url_content_type = ContentType.objects.create(model='unused')
+>>> can_view_url = Permission.objects.create(name='can view url', content_type=url_content_type,codename='can_view_url')
+
+添加的权限就可以在数据库中查看到了：
+	select * from django_content_type;
+
+在views 中使用装饰器 @permission_required('can_view_url', login_url='/login/')
+
+或者在 template中使用{% if perms.can_view_url %}   {% endif %}
+
+
+
+
+给“can_view_url权限”添加用户
+>>> user = User.objects.get(username='example_user', is_superuser=False)
+>>> user.user_permissions.add(can_view_url)
+或者在用户设置界面 http://localhost:8888/manage/admin/tibet/opsuser/3/change/ 添加相应的 ”User permissions“
+或者在用户组设置界面 http://localhost:8888/manage/admin/auth/group/1/change/ 添加相应的 ”Permissions“	//建议采用这种方式，再把用户加入到相应组

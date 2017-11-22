@@ -34,6 +34,15 @@ class RestartJobs(models.Model):
         ordering = ['-applitime']
     objects = RestartManager()
 
+class MiddwearDeploy(models.Model):
+    deployer = models.CharField(max_length=128, null=True, blank=True)
+    deploytime = models.DateTimeField(auto_now=True)
+    minion_id = models.CharField(max_length=128, null=True, blank=True)
+    middware = models.CharField(max_length=128, null=True, blank=True)
+    edition = models.CharField(max_length=128, null=True, blank=True)
+    clustter = models.CharField(max_length=128, null=True, blank=True)
+    jid = models.CharField(max_length=128, null=True, blank=True)
+    note = models.CharField(max_length=128, null=True, blank=True)
 
 ### belows are salt_about
 class jids(models.Model):

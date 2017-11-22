@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}Index{% endblock %}
+{% block title %}仿真中间件部署{% endblock %}
 
 {% block css %}{% endblock %}
 
@@ -17,55 +17,142 @@
                 <i class="fa  fa-cubes fa-fw"></i> 工程选项
             </div>
             <div class="panel-body">
-                <br class="form-inline" id='form_restart'  method="POST" action="#">{% csrf_token %}
+                <form class="form-inline" id='midd_deploy_form'  method="POST" action="#">{% csrf_token %}
                     <div class="form-group">
                         <label>安装地址</label>
-                        <input class="form-control" name="note" placeholder="请填写需要安装机器的 salt_minion[ID]">
+                        <input class="form-control" name="minion_id" placeholder="请填写需要安装机器的 salt_minion[ID]">
                     </div>
-                    <br/>
+                    <br/><br/>
+
                     <div class="form-group">
-                        <div class="form-group">
-                            <label>中间件</label>
-                            <select class="form-control">
-                                <option>redis</option>
-                                <option>dubbo</option>
-                                <option>nginx</option>
-                                <option>mongo</option>
-                            </select>
-                        </div>
+                        <label>中间件</label>
+                        <select class="form-control" name="middware" id="middware" onchange="Get_Next_Place('middware','Get_edition')">
+                            <option id="Not_data1">Middware_name</option>
+                            <option id="redis" value="redis">redis</option>
+                            <option id="dubbo" value="dubbo">dubbo</option>
+                            <option id="nginx" value="nginx">nginx</option>
+                            <option id="mongodb" value="mongodb">mongo</option>
+                        </select>
                     </div>
-                    <br/>
+                    <br/><br/>
+                    <div class="form-group">
+                        <label>版本</label>
+                        <select class="form-control" name="edition" id="edition" onchange="Get_Next_Place('edition','Get_clustter')">
+                            <option id="Not_data2">Edition</option>
+                        </select>
+                    </div>
+                    <br/><br/>
                     <div class="form-group">
                         <label>是否集群</label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">是
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked>否
-                            </label>
-                        </div>
+                        <select class="form-control" name="clustter" id="clustter">
+                            <option id="Not_data3">Clustter</option>
+                        </select>
                     </div>
-                    </br>
+                    <br/><br/>
                     <div class="form-group">
                         <label>备注</label>
                         <input class="form-control" name="note" placeholder="请填写备注信息">
                     </div>
-                    <br/>
-                    <button type="button" id='restart_info' class="btn btn-success ">commit</button>
+                    <br/><br/>
+                    <button type="button" id='midd_deploy' class="btn btn-success ">commit</button>
                 </form>
-                <div><strong id="things"></strong></div>
             </div>
         </div>
     </div>
     </div>
 
+
+
 {% endblock %}
 
 {% block script %}
 
+    <script src="{% static "sb/vendor/jquery/jquery.min.js" %}"></script>
+    <script>
+        $('#midd_deploy').click(function(){
+        //alert(MYAPP.pros);
+        //alert($("textarea[name='project']").val());
+            //alert("hello");
+            var linkk;
+            linkk = "/midd_deploy_info"
+            $.post(linkk, $("#midd_deploy_form").serialize(), function(data){
+                alert(data);
+            });
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        //用来获得option元素中selected属性为true的元素的id
+        function Get_Selected_Id(place){
+            var pro = document.getElementById(place);
+            var Selected_Id = pro.options[pro.selectedIndex].id;
+            return Selected_Id;        //返回selected属性为true的元素的id
+        }
+        //改变下一个级联的option元素的内容，即加载市或县
+        function Get_Next_Place(This_Place_ID,Action){
+            var Selected_Id = Get_Selected_Id(This_Place_ID);  //Selected_Id用来记录当前被选中的省或市的ID
+            if(Action=='Get_edition')                            //从而可以在下一个级联中加载相应的市或县
+                Add_edition(Selected_Id);
+            else if(Action=='Get_clustter')
+                Add_clustter(Selected_Id);
+        }
+        //用来存储省市区的数据结构
+        var Place_dict = {
+            "redis":{
+                            "redis1.0":["clustter","single"],
+                            "redis2.0":["clustter","single"],
+                            "redis3.0":["clustter","single"],
+                            "redis4.0.2":["clustter","single"]
+                            },
+            "dubbo":{
+                            "dubbo1.0":["clustter","single"],
+                            "dubbo2.0":["clustter","single"],
+                            "dubbo3.0":["clustter","single"]
+                            },
+            "nginx":{
+                            "nginx1.0":["clustter","single"],
+                            "nginx2.0":["clustter","single"],
+                            "nginx3.0":["clustter","single"]
+                            },
+            "mongodb":{
+                            "mongodb1.0":["clustter","single"],
+                            "mongodb2.0":["clustter","single"],
+                            "mongodb3.0":["clustter","single"]
+                            },
+        };
+        //加载城市选项
+        function Add_edition(Middware_Selected_Id){
+            $("#edition").empty();
+            $("#edition").append("<option>Edition</option>");
+            $("#clustter").empty();
+            $("#clustter").append("<option>Clustter</option>");
+            //上面的两次清空与两次添加是为了保持级联的一致性
+            var middware_dict = Place_dict[Middware_Selected_Id];  //获得一个省的字典
+            for(edition in middware_dict){    //取得省的字典中的城市
+                //添加内容的同时在option标签中添加对应的城市ID
+                var text = "<option"+" id='"+edition+"'>"+edition+"</option>";
+                $("#edition").append(text);
+                console.log(text);  //用来观察生成的text数据
+            }
+        }
+        //加载县区选项
+        function Add_clustter(Edition_Selected_Id){
+            $("#clustter").empty();
+            $("#clustter").append("<option>Clustter</option>");
+            //上面的清空与添加是为了保持级联的一致性
+            var Middware_Selected_ID = Get_Selected_Id("middware");    //获得被选中省的ID，从而方便在字典中加载数据
+            var clustter_list = Place_dict[Middware_Selected_ID][Edition_Selected_Id];  //获得城市列表
+            for(index in clustter_list){
+                ////添加内容的同时在option标签中添加对应的县区ID
+                var text = "<option"+" id=\'"+clustter_list[index]+"\'>"+clustter_list[index]+"</option>";
+                $("#clustter").append(text);
+                console.log(text);  //用来观察生成的text数据
+            }
+        }
+
+    </script>
 
 {% endblock %}
 

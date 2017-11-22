@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from views import common, lhasa, result, user
+from views import common, lhasa, result, user, docs
 
 urlpatterns = [
     url(r'^login/$', common.method_splitter, {'GET': user.get_login, 'POST': user.post_login}, name='login'),
@@ -20,7 +20,8 @@ urlpatterns = [
     url(r'^restart_fz/restart$', lhasa.restart_fz_r),
     url(r'^machine_status$', common.method_splitter, {'GET': lhasa.machine_status}, name='machine_status'),
 
-    url(r'^midd-deploy/$', common.method_splitter, {'GET': lhasa.get_midd_deploy, 'POST': lhasa.post_midd_deploy}, name='midd-deploy'),
+    url(r'^midd-deploy/$', common.method_splitter, {'GET': lhasa.get_midd_deploy}, name='midd-deploy'),
+    url(r'^midd_deploy_info$', lhasa.post_midd_deploy),
 
     url(r'^testt$', lhasa.testt),
 
@@ -30,4 +31,7 @@ urlpatterns = [
 
     url(r'^pcstatus_test$', result.pcstatus_test),
     url(r'^serverstatus_test$', result.serverstatus_test),
+
+    # docs urls
+    url(r'^manual$', docs.manual, name='manual'),
 ]

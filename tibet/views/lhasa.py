@@ -7,8 +7,9 @@ from tibet.tools.salt_api import saltCmd
 #from tibet.tools.jenkins_api import restart_job_vir_jenkins
 from tibet.tools.salt_api_client import restart_job_vir_salt
 from tibet.tools.utils import clean_data, single_list
+from tibet.tools.salt_http_api_async import SaltApi, salt_api
 
-from tibet.models import RestartJobs
+from tibet.models import RestartJobs, MiddwearDeploy
 
 import datetime
 
@@ -66,12 +67,44 @@ def restart_fz_r(request):
             lt = RestartJobs.objects.get(id=int(resid))
             projects = lt.projects
             projects_list = projects.split(",")
-            jids = restart_job_vir_salt(projects_list)
+
+            with open("tomcat-quanfangzhen.txt") as f:
+                lines = f.readlines()
+            jids = []
+            restarted_job = []
+            try:
+                salt1 = SaltApi(salt_api)
+            except Exception as e:
+                print e
+                inf = 'ret code 2'
+                print 'ret code 2'
+                return HttpResponse(inf)
+            for project in projects_list:
+                target = ""
+                for line in lines:
+                    if project == line.split()[0]:
+                        target = line.split()[1]
+                        # jid = local.cmd_async(target, 'cmd.run', ['/opt/deploy.sh %s'%project])
+                        salt_client = target
+                        salt_method = 'cmd.run'
+                        salt_params = '/opt/deploy.sh %s' % project
+                        try:
+                            jid1 = salt1.salt_async_command(salt_client, salt_method, salt_params)
+                        except Exception as e:
+                            print e
+                            inf = 'ret code 3'
+                            print 'ret code 3'
+                            return HttpResponse(inf)
+                        #jid = local.cmd_async(target, 'cmd.run', ['/opt/deploy.sh %s' % project])
+                        jids.append(jid1)
+                        restarted_job.append('{%s => %s}'%(target, project))
+            #jids = restart_job_vir_salt(projects_list)
+
             #jobname = restart_job_vir_jenkins(projects)
             #cus = RestartJobs.objects.filter(id=int(resid)).update(restarttime=time, jenksins_job_name=jobname)
             #lt2 = RestartJobs.objects.get(id=int(resid))
             #restarttime = lt2.restarttime.strftime("%Y-%m-%d %H:%M:%S")
-            return HttpResponse(jids)
+            return HttpResponse(restarted_job)
         else:
             return HttpResponse('restart failed!')
 
@@ -80,8 +113,56 @@ def get_midd_deploy(request):
     return render(request, 'lhasa/midd_deploy.html', locals())
 
 def post_midd_deploy(request):
-    pass
+    # pro_name2 = request.POST.getlist('pro', '')
+    user = request.user
+    minion_id = request.POST.get('minion_id', '')
+    middware = request.POST.get('middware', '')
+    edition = request.POST.get('edition', '')
+    clustter = request.POST.get('clustter', '')
+    note = request.POST.getlist('note', '')
+    #salt_params = 'test.redis-4_0_2-single.install'
+    #salt_params = ''
+    if middware == 'redis':
+        if edition == "redis4.0.2":
+            if clustter == "single":
+                salt_params = 'test.redis-4_0_2-single.install'
+            else:
+                pass
+        else:
+            pass
+    elif middware == 'dubbo':
+        pass
+    elif middware == 'nginx':
+        pass
+    elif middware == 'mongodb':
+        pass
+    else:
+        pass
+
+    try:
+        salt1 = SaltApi(salt_api)
+        print salt_api
+        salt_client = minion_id
+        salt_method = 'state.sls'
+
+        jid1 = salt1.salt_async_command(salt_client, salt_method, salt_params)
+        print jid1
+    except Exception as e:
+        print e
+        inf = 'ret code 1'
+        print 'ret code 1'
+        return HttpResponse(inf)
+    #print jid1
+    try:
+        new_job = MiddwearDeploy(deployer=user, minion_id=minion_id, middware=middware, edition=edition, clustter=clustter, jid=jid1, note=note)
+        new_job.save()
+    except:
+        raise
+    inf = "deploy middware %s edition %s clustter %s on machine %s"%(middware, edition, clustter,minion_id)
+    return HttpResponse(inf)
+
+
 
 def testt(request):
-    return render(request, 'lhasa/testt2.html', locals())
+    return render(request, 'lhasa/testt.html', locals())
 

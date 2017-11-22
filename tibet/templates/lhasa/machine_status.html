@@ -10,13 +10,174 @@
 
 {% block main %}
 
+    <!-- 中间件服务 -->
     <div class="row" style='margin-top:20px'>
         <button class="btn btn-default" id='addmacBtn' style='margin-left:20px'>添加机器（中间件机器）</button>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default" style='margin-top:20px;'>
+                    <div class="panel-heading">
+                        <i class="fa fa-asterisk fa-fw"></i> 中间件服务
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    Actions
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu pull-right" role="menu">
+                                    <li><a href="#">Action</a>
+                                    </li>
+                                    <li><a href="#">Another action</a>
+                                    </li>
+                                    <li><a href="#">Something else here</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>ip</th>
+                                <th>运行的服务</th>
+                                <th>服务状态</th>
+                                <th>重启命令</th>
+                                <th>操作</th>
+                                <th>备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {%for all_host in all_host %}
+                                <tr>
+                                    <td id="bianhao">{{all_host.id}}</td>
+                                    <td id="host">{{all_host.hostname}}</td>
+                                    <td id="host_ip">{{all_host.ip}}</td>
+                                    <td id="jigui_bianhao">{{all_host.bianhao}}</td>
+                                    <td id="jifang">{{all_host.idc_name}}</td>
+                                    <td id="server">{{all_host.application}}</td>
+                                    <td>
+                                        <span class="label label-primary hover deletemac"><a href="/mac/mac_edit/?id={{ all_host.id }}" style="color:white"  role="button">编辑</a></span>
+                                        <span class="label label-primary hover deletemac"><a href="/mac/mac_delete/?id={{ all_host.id }}" style="color:white"  role="button">删除</a></span>
+                                    </td>
+                                </tr>
+                                {%endfor%}
+                                <tr>
+                                    <td id="#">192.168.1.1</td>
+                                    <td id="#">redis 1.0</td>
+                                    <td id="#">down</td>
+                                    <td id="#">servcie redis start 【此处为可编辑,可以不使用默认的重启命令】</td>
+                                    <td id="#">
+                                        {% if service.status is up %}
+                                            <button>restart</button> or <button>stop</button>
+                                        {% else %}
+                                            <button>start</button>
+                                        {% endif %}</td>
+                                    <td id="#">备注: this is 备注 . </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id='addmacModal'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加机器</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal"  method="post" action="/addmac/">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">机器名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id='name'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">ip地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id='ip'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">重启命令</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id='idc_jg'>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">运行服务</label>
+                            <div class="col-sm-10">
+                            <select id="idc_name"  class="form-control">
+                                {%for all_idc in all_idc%}
+                                <option>{{all_idc.idc_name}}</option>
+                                {%endfor%}
+                            </select>
+                          <!-- <input type="text" class="form-control" name='ip'> -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">备注</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id='service'>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary"  onclick="macadd(this);" >确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <hr/>
+    <!-- java 服务（包括tomcat服务、非tomcat服务） -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default" style='margin-top:20px;'>
+                <div class="panel-heading">
+                    <i class="fa fa-fire fa-fw"></i> java 服务（包括tomcat服务、非tomcat服务）
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li><a href="#">Action</a>
+                                </li>
+                                <li><a href="#">Another action</a>
+                                </li>
+                                <li><a href="#">Something else here</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
                     <div class="dataTable_wrapper">
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
@@ -54,64 +215,6 @@
             <!-- /.panel -->
         </div>
     </div>
-
-
-
-    <div class="modal fade" id='addmacModal'>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">添加机器</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal"  method="post" action="/addmac/">
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">机器名</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id='name'>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">ip地址</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id='ip'>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">机柜</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id='idc_jg'>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">idc</label>
-                            <div class="col-sm-10">
-                            <select id="idc_name"  class="form-control">
-                                {%for all_idc in all_idc%}
-                                <option>{{all_idc.idc_name}}</option>
-                                {%endfor%}
-                            </select>
-                          <!-- <input type="text" class="form-control" name='ip'> -->
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">运行服务</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id='service'>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary"  onclick="macadd(this);" >确认</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-
 {% endblock %}
 
 {% block script %}

@@ -7,3 +7,7 @@ ping outofmemory.cn这个命令在linux下会不停的ping，我们没有给-c 4
 salt-run jobs.active
 显示当前活动的任务id，例如： 20141230094047407913 这时候我们就可以执行一个salt命令来结束这个job了。
 salt '*' saltutil.term_job 20141230094047407913
+
+参数--async，返回job ID，根据job ID我们可以查询执行结果。
+salt --async '*' test.ping
+salt-run jobs.lookup_jid 20161117163153353501

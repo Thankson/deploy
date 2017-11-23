@@ -9,6 +9,13 @@ django 权限管理:
 	https://www.cnblogs.com/skying555/p/5992711.html	Django中的许可（Permissions）和用户组（Group）
 
 
+django 权限管理模块
+    http://blog.csdn.net/yangyihongyangjiying/article/details/45620941  用源码告诉你django权限管理是怎么回事
+    http://blog.csdn.net/yangyihongyangjiying/article/details/45370107  django 自定义 USER
+    http://blog.csdn.net/yangyihongyangjiying/article/details/45623865  django 自定义user使用权限管理模块
+
+
+
 主要介绍 不绑定特定的model 的权限如何定义：
  1 在Terminal 中进入python 终端：依次输入以下：
 >>> import os,django

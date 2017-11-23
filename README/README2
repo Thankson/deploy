@@ -69,7 +69,3 @@ salt-api用法:
     http://www.jianshu.com/p/012ccdff93cc
     http://blog.csdn.net/hnhuangyiyang/article/details/50667000
 #######################################################################################################################################
-django 权限管理模块
-    http://blog.csdn.net/yangyihongyangjiying/article/details/45620941  用源码告诉你django权限管理是怎么回事
-    http://blog.csdn.net/yangyihongyangjiying/article/details/45370107  django 自定义 USER
-    http://blog.csdn.net/yangyihongyangjiying/article/details/45623865  django 自定义user使用权限管理模块

@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a33cdf7-35b5-4ba4-b8d5-34d7f21f4e6a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README/README3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README/源码安装中间件/redis-4_0_2-single.tar.gz" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README/源码安装中间件/源码安装redis(single)" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README/README2" afterPath="$PROJECT_DIR$/README/README2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/admin.py" afterPath="$PROJECT_DIR$/tibet/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/models.py" afterPath="$PROJECT_DIR$/tibet/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html" afterPath="$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/templates/snippet/layout.html" afterPath="$PROJECT_DIR$/tibet/templates/snippet/layout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tibet/views/lhasa.py" afterPath="$PROJECT_DIR$/tibet/views/lhasa.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README/README3" afterPath="$PROJECT_DIR$/README/README3" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README3" pinned="false" current-in-tab="false">
+      <file leaf-file-name="README3" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README/README3">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="56" />
+            <state relative-caret-position="288">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -73,21 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="restart_fz.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="restart_fz.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="midd_deploy.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="667">
-              <caret line="103" column="58" lean-forward="false" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="58" />
+            <state relative-caret-position="332">
+              <caret line="24" column="33" lean-forward="false" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -106,21 +93,29 @@
       <file leaf-file-name="README2" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README/README2">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="73" column="87" lean-forward="false" selection-start-line="73" selection-start-column="87" selection-end-line="73" selection-end-column="87" />
+            <state relative-caret-position="492">
+              <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tibet/admin.py">
+      <file leaf-file-name="README" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README/README">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="14" column="27" lean-forward="false" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-              <folding>
-                <element signature="e#24#63#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="源码安装redis(single)" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README/源码安装中间件/源码安装redis(single)">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -178,8 +173,8 @@
       <find>%s</find>
       <find>Reques</find>
       <find>permission_required</find>
-      <find>django.contrib.contenttypes</find>
       <find>ContentType</find>
+      <find>django.contrib.contenttypes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -188,7 +183,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README/salt/salt-api_client" />
         <option value="$PROJECT_DIR$/tibet/static/js/ops.js" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/commond.html" />
         <option value="$PROJECT_DIR$/tibet/linux_crontab/salt-api-test_README" />
@@ -232,13 +226,14 @@
         <option value="$PROJECT_DIR$/tibet/urls.py" />
         <option value="$PROJECT_DIR$/README/README_salt" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/midd_deploy.html" />
-        <option value="$PROJECT_DIR$/README/README2" />
         <option value="$PROJECT_DIR$/tibet/admin.py" />
         <option value="$PROJECT_DIR$/tibet/models.py" />
         <option value="$PROJECT_DIR$/tibet/views/lhasa.py" />
-        <option value="$PROJECT_DIR$/README/README3" />
         <option value="$PROJECT_DIR$/tibet/templates/snippet/layout.html" />
         <option value="$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html" />
+        <option value="$PROJECT_DIR$/README/源码安装中间件/源码安装redis(single)" />
+        <option value="$PROJECT_DIR$/README/README2" />
+        <option value="$PROJECT_DIR$/README/README3" />
       </list>
     </option>
   </component>
@@ -290,6 +285,12 @@
             <path>
               <item name="deploy" type="b2602c69:ProjectViewProjectNode" />
               <item name="deploy" type="462c0819:PsiDirectoryNode" />
+              <item name="README" type="462c0819:PsiDirectoryNode" />
+              <item name="源码安装中间件" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deploy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deploy" type="462c0819:PsiDirectoryNode" />
               <item name="tibet" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -323,13 +324,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/README/源码安装中间件" />
       <recent name="$PROJECT_DIR$/tibet/templates/lhasa" />
       <recent name="$PROJECT_DIR$/tibet/static/avatar" />
       <recent name="$PROJECT_DIR$/tibet" />
       <recent name="$PROJECT_DIR$/tibet/forms" />
-      <recent name="$PROJECT_DIR$/tibet/templates/user" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/README/源码安装中间件" />
       <recent name="$PROJECT_DIR$/README" />
       <recent name="C:\Users\admin\PycharmProjects\deploy\tibet\templates\result_json" />
       <recent name="C:\Users\admin\PycharmProjects\deploy\tibet\static\sb\vendor\bootstrap\css" />
@@ -432,13 +434,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README/salt/salt-api_http">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tibet/tools/svn_delete_user_auth_file.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-446">
@@ -669,14 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README/README">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/machine_status.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-990">
@@ -761,14 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README/README2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="73" column="87" lean-forward="false" selection-start-line="73" selection-start-column="87" selection-end-line="73" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tibet/views/lhasa.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
@@ -789,14 +768,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README/README3">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="29" column="56" lean-forward="true" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tibet/templates/snippet/layout.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="535">
@@ -807,8 +778,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tibet/templates/lhasa/restart_fz.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="332">
+          <caret line="24" column="33" lean-forward="false" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README/源码安装中间件/源码安装redis(single)">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README/README2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README/README3">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>

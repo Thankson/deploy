@@ -1,0 +1,35 @@
+参考:http://www.cnblogs.com/zhahost/p/5110376.html
+
+FQA:
+http://blog.csdn.net/gxw19874/article/details/51992125  service redis does not support chkconfig的解决办法
+http://blog.csdn.net/menghuanhongye1987/article/details/12051577    nginx运行文件出错env: /etc/init.d/nginx: No such file or directory(估计是我在windows下修改文件的时候换行符出现问题了。)
+
+
+
+
+
+准备redis安装包 redis-4.0.2.tar.gz，并放在/usr/local/src/redis-4.0.2.tar.gz目录下（redis-4.0.2.tar.gz为最新稳定版stable ，截至2017/11/17）
+
+创建目录 /usr/local/redis
+
+编译安装
+进入cd /usr/local/src/
+解压redis-4.0.2.tar.gz ， tar -zxvf redis-4.0.2.tar.gz && cd redis-4.0.2
+make
+make PREFIX=/usr/local/redis install
+
+Redis配置
+mkdir /usr/local/redis/etc/
+cp redis.conf /usr/local/redis/etc/
+cd /usr/local/redis/bin/
+cp redis-benchmark redis-cli redis-server /usr/bin/
+
+/*
+调整下内存分配使用方式并使其生效
+#此参数可用的值为0,1,2
+#0表示当用户空间请求更多的内存时，内核尝试估算出可用的内存
+#1表示内核允许超量使用内存直到内存用完为止
+#2表示整个内存地址空间不能超过swap+(vm.overcommit_ratio)%的RAM值
+echo "vm.overcommit_memory=1">>/etc/sysctl.conf
+sysctl -p
+*/

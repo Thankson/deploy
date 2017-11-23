@@ -2,7 +2,22 @@
 
 {% load staticfiles %}
 
+{% load ops_extras %}
+
 {% block title %}重启仿真{% endblock %}
+
+{% block css %}
+    <style>
+    .tooltips{ border-width: 1px; border-style: solid; position: absolute; display: none; border-radius: 3px; opacity: 0; filter:alpha( opacity = 0) ; z-index: 999;}
+    .tooltips p.content{ padding: 5px; }
+    .tooltips .triangle-front,.tooltips .triangle-back{ width: 0; height: 0; overflow: hidden; border-width: 8px; border-style: solid; position: absolute; border-color: transparent ; top: 100%; left: 50%; margin-left: -8px;}
+    .tooltips .triangle-back{ margin-top: -1px;}
+
+    .yellow{ border-color: #c7c08d; background-color: #fffac3;}
+    .yellow .triangle-front{ border-top-color: #c7c08d;}
+    .yellow .triangle-back{ border-top-color: #fffac3;}
+    </style>
+{% endblock %}
 
 {% block module %}重启仿真{% endblock %}
 
@@ -37,7 +52,7 @@
                                 <input class="form-control" name="note" placeholder="请填写备注信息">
                             </div>
                             <br/>
-                            <button type="button" id='restart_info' class="btn btn-success ">commit</button>
+                            <button type="button" id='restart_info' class="btn btn-success ">apply</button>
                         </form>
                         <div><strong id="things"></strong></div>
                     </div>
@@ -57,27 +72,19 @@
                     <div class="list-group">
 
                         {% for res in get_all_restart %}
-                            <a href="#" class="list-group-item">
+                            <a href="#" class="list-group-item" id="steven">
                             {% if res.operator %}
-                                <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>&nbsp{{ applicant }}&nbsp申请已通过 &nbsp{{ res.projects }}&nbsp 等
-                                <span class="pull-right text-muted small">&nbsp&nbsp<em>4 minutes ago</em></span>
+                                <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>&nbsp{{ res.operator }}&nbsp已通过<strong class="text-success" title="{{ res.projects }}" tooltips="{{ res.projects }}"> &nbsp{{ res.projects | project_process }}&nbsp 等</strong>
+                                <span class="pull-right text-muted small">&nbsp&nbsp<em>{{ res.restarttime | pretty_date }}</em></span>
                             {% else %}
-                                <button type="button" class="btn btn-default btn-circle" id="restart_btn" res_id="{{ res.id }}"><i class="fa fa-link"></i></button>&nbsp{{ applicant }} &nbsp申请重启&nbsp {{ res.projects }} &nbsp 等
-                                <span class="pull-right text-muted small">&nbsp&nbsp<em>4 minutes ago</em></span>
+                                <button type="button" class="btn btn-default btn-circle" id="restart_btn" res_id="{{ res.id }}"><i class="fa fa-link"></i></button>&nbsp{{ res.applicant }} &nbsp申请重启&nbsp<strong class="text-muted" title="{{ res.projects }}" tooltips="{{ res.projects }}"> {{ res.projects | project_process }} &nbsp 等</strong>
+                                <span class="pull-right text-muted small">&nbsp&nbsp<em>{{ res.applitime | pretty_date }}</em></span>
                             {% endif %}
                             </a>
                         {% endfor %}
 
-                        <a href="#" class="list-group-item">
-                            <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>***已重启 vst_bak 等
-                            <span class="pull-right text-muted small"><em>view details</em>&nbsp&nbsp<em>4 minutes ago</em></span>
-                        </a>
-                        <a href="#" class="list-group-item">
-                            <i class="fa fa-comment fa-fw"></i> New Comment
-                            <span class="pull-right text-muted small"><em>4 minutes ago</em>
-                            </span>
-                        </a>
                     </div>
+                    <strong id="items">aaa</strong>
                     <!-- /.list-group -->
                     <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                 </div>
@@ -161,6 +168,65 @@
             alert(data);
         });
     });
+
+
+/*
+方法一:
+参考: http://www.lanrenzhijia.com/jquery/2822.html
+    $.fn.extend({
+        hoverTips : function (){
+            var self = $(this);
+            var sw = self.get(0).switch;
+            var tooltips;
+            tooltips = $(this).attr("tooltips");
+            if( !sw ) {
+                sw = true;
+                var content = self.attr("tooltips");
+                var htmlDom = $("<div class='tooltips'>")
+                        .addClass("yellow")
+                        .html("<p class='content'></p>"
+                                + "<p class='triangle-front'></p>"
+                                + "<p class='triangle-back'></p>");
+                htmlDom.find("p.content").html( content );
+            }
+            self.on("mouseover",function(){
+                var tooltips;
+                tooltips = $(this).attr("tooltips");
+                $("body").append( htmlDom );
+                var left = self.offset().left - htmlDom.outerWidth()/2 + self.outerWidth()/2;
+                var top = self.offset().top - htmlDom.outerHeight() - parseInt(htmlDom.find(".triangle-front").css("border-width"));
+                htmlDom.css({"left":left,"top":top - 10,"display":"block"});
+                htmlDom.stop().animate({ "top" : top ,"opacity" : 1},300);
+            });
+            self.on("mouseout",function(){
+                var top = parseInt(htmlDom.css("top"));
+                htmlDom.stop().animate({ "top" : top - 10 ,"opacity" : 0},300,function(){
+                    htmlDom.remove();
+                    sw = false;
+                });
+            });
+        },
+    });
+
+
+
+$('#steven strong').hoverTips();
+
+
+方法二:
+        $('#steven strong').mouseover(function(){
+            var projects;
+            projects = $(this).attr("projects");
+
+            $("body").append( projects );
+
+
+        })
+
+*/
+
+
+
 
     </script>
 {% endblock %}

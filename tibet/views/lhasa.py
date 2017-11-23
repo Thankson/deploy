@@ -15,18 +15,7 @@ import datetime
 
 from django.contrib.auth.decorators import permission_required
 
-######################################
-# from django.contrib.auth.models import Permission
-# from django.contrib.contenttypes.models import ContentType
-#
-#
-#
-# url_content_type = ContentType.objects.create(model='unused')
-#
-# can_view_url = Permission.objects.create(name='can view url', content_type=url_content_type,codename='can_view_url')
 
-
-######################################
 
 
 def index(request):
@@ -46,6 +35,7 @@ def commondexe(request):
 
 #@permission_required('tibet.change_group', login_url='/login/')
 def restart_fz(request):
+    user = request.user
     applicant = '小明'
     pro = 'vst_back'
     get_all_restart = RestartJobs.objects.get_all_restart_by_time()
@@ -56,6 +46,7 @@ def machine_status(request):
     return render(request, 'lhasa/machine_status.html', locals())
 
 def restart_fz_shenqing(request):
+    user = request.user
     pro_name = request.POST.get('project', '')
     pro_name2 = request.POST.getlist('pro', '')
     print pro_name
@@ -69,14 +60,15 @@ def restart_fz_shenqing(request):
     projects = ','.join(projects)
     note = request.POST.getlist('note', '')
     try:
-        new_job = RestartJobs(projects=projects, note=note)
+        new_job = RestartJobs(applicant=user, projects=projects, note=note)
         new_job.save()
     except:
         raise
     return HttpResponse(projects)
 
 def restart_fz_r(request):
-
+    user = request.user
+    username = user.username
     resid = None
     time = datetime.datetime.now()
     if request.method == 'GET':
@@ -108,6 +100,10 @@ def restart_fz_r(request):
                         salt_params = '/opt/deploy.sh %s' % project
                         try:
                             jid1 = salt1.salt_async_command(salt_client, salt_method, salt_params)
+                            # result1 = salt1.look_jid(jid1)
+                            # for i in result1.keys():
+                            #     print i
+                            #     print result1[i]
                         except Exception as e:
                             print e
                             inf = 'ret code 3'
@@ -119,7 +115,7 @@ def restart_fz_r(request):
             #jids = restart_job_vir_salt(projects_list)
 
             #jobname = restart_job_vir_jenkins(projects)
-            #cus = RestartJobs.objects.filter(id=int(resid)).update(restarttime=time, jenksins_job_name=jobname)
+            cus = RestartJobs.objects.filter(id=int(resid)).update(restarttime=time, operator=username)
             #lt2 = RestartJobs.objects.get(id=int(resid))
             #restarttime = lt2.restarttime.strftime("%Y-%m-%d %H:%M:%S")
             return HttpResponse(restarted_job)
@@ -127,6 +123,7 @@ def restart_fz_r(request):
             return HttpResponse('restart failed!')
 
 #@permission_required('tibet.change_group', login_url='/login/')
+@permission_required('crashstats.can_view_url', login_url='/')
 def get_midd_deploy(request):
     return render(request, 'lhasa/midd_deploy.html', locals())
 
@@ -134,10 +131,10 @@ def get_midd_deploy(request):
 def post_midd_deploy(request):
     # pro_name2 = request.POST.getlist('pro', '')
     user = request.user
-    print user
-    print 'a'
-    #print request.user.groups.name
-    print user.has_perm('tibet.change_group')
+    # print user
+    # print 'a'
+    # #print request.user.groups.name
+    # print user.perms.crashstats.can_view_url
     #group = groups.objects.all()
     minion_id = request.POST.get('minion_id', '')
     middware = request.POST.get('middware', '')

@@ -34,4 +34,6 @@ urlpatterns = [
 
     # docs urls
     url(r'^manual$', docs.manual, name='manual'),
+    url(r'^manual/redis4singleinstall$', docs.redis4singleinstall, name='redis4singleinstall'),
+
 ]

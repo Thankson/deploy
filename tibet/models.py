@@ -5,18 +5,12 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractUser
 
+import datetime
+
 # Create your models here.
-######################################
-# from django.contrib.auth.models import Permission
-# from django.contrib.contenttypes.models import ContentType
 
-#url_content_type = ContentType.objects.create(name='url permission', app_label='crashstats', model='unused')
-#url_content_type = ContentType.objects.create(model='unused5')
-#can_view_url = Permission.objects.create(name='can view url', content_type=url_content_type,codename='can_view_url')
 
-#user = User.objects.get(username='example_user', is_superuser=False)
-#user.user_permissions.add(can_view_url)
-######################################
+
 class OpsUser(AbstractUser):
 
     nickname = models.CharField(max_length=200, null=True, blank=True)
@@ -27,8 +21,11 @@ class OpsUser(AbstractUser):
 
 class RestartManager(models.Manager):
     def get_all_restart_by_time(self):
+        year = datetime.datetime.now().year
+        month = datetime.datetime.now().month
+        day = datetime.datetime.now().day
         query = self.get_queryset().\
-                all().order_by('-applitime')
+                filter(applitime__year=year,applitime__month=month,applitime__day=day).order_by('-applitime')
         return query
 
 class RestartJobs(models.Model):

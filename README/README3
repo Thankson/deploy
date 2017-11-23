@@ -34,7 +34,7 @@ django 权限管理模块
 
 在views 中使用装饰器 @permission_required('can_view_url', login_url='/login/')
 
-或者在 template中使用{% if perms.can_view_url %}   {% endif %}
+或者在 template中使用{% if perms.crashstats.can_view_url %}   {% endif %}
 
 
 

@@ -135,7 +135,10 @@ def content_process(content): #内容处理，把gist，微博图片什么的替
     content = re.sub(r'http://v.youku.com/v_show/id_(\w+).html', r'<iframe height=498 width=510 src="http://player.youku.com/embed/\1" frameborder=0 allowfullscreen style="width:100%;max-width:510px;"></iframe>', content)
     return content
 
-
+@register.filter(name='project_process')
+def project_process(projects):
+    projects2 = projects.split(",")
+    return projects2[0]
 
 
 @register.filter(name='email_mosaic')

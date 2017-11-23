@@ -35,8 +35,9 @@ django
 	python manage.py makemigrations
 	python manage.py migrate
 	python manage.py createsuperuser
-	    admin   sa123456
-	    steven      790494072@qq.com    sa123456
+	    steven      790494072@qq.com        sa123456
+	    zengqingwen zengqingwen@lvmama.com  123456
+	    liangshi    liangshi@lvmama.com     123456
 #######################################################################################################################################
 用脚本sh 以root用户权限来启动pycharm
 	vim pycharm_root.sh

@@ -1,7 +1,8 @@
 # -*- encoding:utf-8 -*-
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
+
 
 from tibet.tools.salt_api import saltCmd
 #from tibet.tools.jenkins_api import restart_job_vir_jenkins
@@ -9,7 +10,7 @@ from tibet.tools.salt_api_client import restart_job_vir_salt
 from tibet.tools.utils import clean_data, single_list
 from tibet.tools.salt_http_api_async import SaltApi, salt_api
 
-from tibet.models import RestartJobs, MiddwearDeploy
+from tibet.models import RestartJobs, MiddwearDeploy, HostList
 
 import datetime
 
@@ -42,8 +43,26 @@ def restart_fz(request):
     print get_all_restart
     return render(request, 'lhasa/restart_fz.html', locals())
 
-def machine_status(request):
-    return render(request, 'lhasa/machine_status.html', locals())
+def mac(request):
+    all_hosts = HostList.objects.all()
+    return render(request, 'lhasa/mac.html', locals())
+
+def mac_add(request):
+    if request.method == 'GET':
+        name = request.GET['name']
+        ip = request.GET['ip']
+        restart_cmd = request.GET['restart_cmd']
+        service = request.GET['service']
+        note = request.GET['note'] or ''
+        macadd = HostList(ip=ip,hostname=name,service=service,restart_cmd=restart_cmd,note=note)
+        macadd.save()
+        return HttpResponse('ok')
+
+def mac_delete(request,id=None):
+    if request.method == 'GET':
+        id = request.GET.get('id')
+        HostList.objects.filter(id=id).delete()
+        return HttpResponseRedirect('/mac')
 
 def restart_fz_shenqing(request):
     user = request.user

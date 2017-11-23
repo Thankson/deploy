@@ -45,41 +45,32 @@
                             <thead>
                             <tr>
                                 <th>ip</th>
+                                <th>机器名</th>
                                 <th>运行的服务</th>
                                 <th>服务状态</th>
                                 <th>重启命令</th>
                                 <th>操作</th>
+                                <th>操作2</th>
                                 <th>备注</th>
                             </tr>
                             </thead>
                             <tbody>
-                                {%for all_host in all_host %}
+                                {%for all_host in all_hosts %}
                                 <tr>
-                                    <td id="bianhao">{{all_host.id}}</td>
-                                    <td id="host">{{all_host.hostname}}</td>
                                     <td id="host_ip">{{all_host.ip}}</td>
-                                    <td id="jigui_bianhao">{{all_host.bianhao}}</td>
-                                    <td id="jifang">{{all_host.idc_name}}</td>
-                                    <td id="server">{{all_host.application}}</td>
+                                    <td id="host">{{all_host.hostname}}</td>
+                                    <td id="service">{{all_host.service}}</td>
+                                    <td id="restart_status"></td>
+                                    <td id="restart_cmd">{{all_host.restart_cmd}}</td>
+                                    <td id="operator"></td>
                                     <td>
-                                        <span class="label label-primary hover deletemac"><a href="/mac/mac_edit/?id={{ all_host.id }}" style="color:white"  role="button">编辑</a></span>
-                                        <span class="label label-primary hover deletemac"><a href="/mac/mac_delete/?id={{ all_host.id }}" style="color:white"  role="button">删除</a></span>
+                                        <span class="label label-primary hover deletemac"><a href="/mac/mac_edit?id={{ all_host.id }}" style="color:white"  role="button">编辑</a></span>
+                                        <span class="label label-primary hover deletemac"><a href="/mac/mac_delete?id={{ all_host.id }}" style="color:white"  role="button">删除</a></span>
                                     </td>
+                                    <td id="operator2">{{all_host.note}}</td>
                                 </tr>
                                 {%endfor%}
-                                <tr>
-                                    <td id="#">192.168.1.1</td>
-                                    <td id="#">redis 1.0</td>
-                                    <td id="#">down</td>
-                                    <td id="#">servcie redis start 【此处为可编辑,可以不使用默认的重启命令】</td>
-                                    <td id="#">
-                                        {% if service.status is up %}
-                                            <button>restart</button> or <button>stop</button>
-                                        {% else %}
-                                            <button>start</button>
-                                        {% endif %}</td>
-                                    <td id="#">备注: this is 备注 . </td>
-                                </tr>
+
                             </tbody>
                         </table>
 
@@ -102,7 +93,7 @@
                     <h4 class="modal-title">添加机器</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal"  method="post" action="/addmac/">
+                    <form class="form-horizontal"  method="post" action="/mac_add">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">机器名</label>
                             <div class="col-sm-10">
@@ -118,16 +109,18 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">重启命令</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id='idc_jg'>
+                                <input type="text" class="form-control" id='recmd'>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">运行服务</label>
                             <div class="col-sm-10">
-                            <select id="idc_name"  class="form-control">
-                                {%for all_idc in all_idc%}
-                                <option>{{all_idc.idc_name}}</option>
-                                {%endfor%}
+                            <select id="ser"  class="form-control">
+                                <option value="midd">Middware_name</option>
+                                <option value="redis4s">redis4single</option>
+                                <option value="redis2s">redis2single</option>
+                                <option value="redis1s">redis1single</option>
+                                <option value="other">nginx,dubbo,nginx,mongo ... </option>
                             </select>
                           <!-- <input type="text" class="form-control" name='ip'> -->
                             </div>
@@ -135,14 +128,14 @@
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">备注</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id='service'>
+                                <input type="text" class="form-control" id='note'>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary"  onclick="macadd(this);" >确认</button>
+                    <button type="button" class="btn btn-primary"  onclick="macadd(this)">确认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -215,11 +208,33 @@
             <!-- /.panel -->
         </div>
     </div>
+
+
+    <div class="modal fade" id='tipModal'>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Modal title</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 {% endblock %}
 
 {% block script %}
 
     <script>
+
+        $('#tipModal').on('hide.bs.modal',function(){
+            location.reload()
+        })
+
         $('#addmacBtn').click(function(){
             $('#addmacModal').modal('show')
         })
@@ -233,28 +248,32 @@
             })
         })
 
-        $('#confirmAddmacBtn').click(function(){
-            var is_val = true
-            $('#addmacForm').find('input').each(function(i,v){
-                if (!$(v).val()) {
-                    $(v).after('<span class="text-danger">必填字段</span>')
-                    is_val = false
-                }else{
-                    $(v).next().remove()
+
+
+        function macadd(ele){
+                /*
+                alert('a');
+                alert($('#name').val());
+                alert($('#ip').val());
+                alert($('#restart_cmd').val());
+                alert($('#service').val());
+                alert($('#note').val());
+                */
+           if($('#name').val()&&$('#ip').val()&&$('#recmd').val()&&$('#ser').val()){
+                var id=$(ele).attr("id");
+                $.ajax({
+                    url:"/mac_add",
+                    data:{name:$('#name').val(),ip:$('#ip').val(),restart_cmd:$('#recmd').val(),service:$('#ser').val(),note:$('#note').val()},
+
+                    success:function(data){
+                        if (data=='ok') {
+                            $('#tipModal').find('.modal-body').html('添加成功').end().modal('show')
+                    }
                 }
-            })
-            if (is_val) {
+            });
+        }}
+        </script>
 
-            $.get('/addmac',$('#addmacForm').serialize(),function(data){
-                if (data=='ok') {
-                    $('#tipModal').find('.modal-body').html('添加成功').end().modal('show')
-                };
-            })
-            };
-
-        })
-
-    </script>
 
 {% endblock %}
 

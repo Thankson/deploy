@@ -52,6 +52,15 @@ class MiddwearDeploy(models.Model):
     jid = models.CharField(max_length=128, null=True, blank=True)
     note = models.CharField(max_length=128, null=True, blank=True)
 
+class HostList(models.Model):
+    ip = models.GenericIPAddressField()
+    hostname = models.CharField(max_length=30, null=True, blank=True)
+    service = models.CharField(max_length=20, null=True, blank=True)
+    restart_cmd = models.CharField(max_length=128, null=True, blank=True)
+    note = models.CharField(max_length=128,null=True,blank=True)
+    def __unicode__(self):
+        return self.ip
+
 ### belows are salt_about
 class jids(models.Model):
     jid = models.CharField(max_length=255, unique=True)

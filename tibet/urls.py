@@ -15,16 +15,22 @@ urlpatterns = [
     url(r'^$', common.method_splitter, {'GET': lhasa.index}, name='index'),
     url(r'^commond/$', common.method_splitter, {'GET': lhasa.commond}, name='commond'),
     url(r'^commondexe$', lhasa.commondexe),
+
     url(r'^restart_fz$', common.method_splitter, {'GET': lhasa.restart_fz}, name='restart_fz'),
     url(r'^restart_fz_shenqing$', lhasa.restart_fz_shenqing),
     url(r'^restart_fz/restart$', lhasa.restart_fz_r),
-    url(r'^machine_status$', common.method_splitter, {'GET': lhasa.machine_status}, name='machine_status'),
+
+    url(r'^mac$', common.method_splitter, {'GET': lhasa.mac}, name='mac'),
+    url(r'^mac_add$', common.method_splitter, {'GET': lhasa.mac_add}, name='mac_add'),
+    url(r'^mac/mac_delete$', common.method_splitter, {'GET': lhasa.mac_delete}, name='mac_delete'),
+
 
     url(r'^midd-deploy/$', common.method_splitter, {'GET': lhasa.get_midd_deploy}, name='midd-deploy'),
     url(r'^midd_deploy_info$', lhasa.post_midd_deploy),
 
     url(r'^testt$', lhasa.testt),
 
+    #################################################################
     # json urls
     url(r'^serverstatus$', result.serverstatus),
     url(r'^projects$', result.projects),

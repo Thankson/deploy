@@ -14,7 +14,7 @@ from tibet.models import RestartJobs, MiddwearDeploy, HostList
 
 import datetime
 
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required,login_required
 
 
 
@@ -43,6 +43,7 @@ def restart_fz(request):
     print get_all_restart
     return render(request, 'lhasa/restart_fz.html', locals())
 
+@login_required
 def mac(request):
     all_hosts = HostList.objects.all()
     return render(request, 'lhasa/mac.html', locals())
@@ -90,6 +91,10 @@ def macresult(request):
             print "get exception"
         finally:
             return HttpResponse('ok')
+
+def mac_status_refresh(request):
+    #pass
+    return render(request, 'lhasa/testt.html', locals())
 
 def restart_fz_shenqing(request):
     user = request.user

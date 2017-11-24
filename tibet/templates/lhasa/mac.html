@@ -21,6 +21,7 @@
             <div class="panel panel-default" style='margin-top:20px;'>
                     <div class="panel-heading">
                         <i class="fa fa-asterisk fa-fw"></i> 中间件服务
+                        {% if perms.tibet.can_operate_hostlist  %}
                         <div class="pull-right">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -28,7 +29,7 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="#">Action</a>
+                                    <li><a href="/mac_status_refresh">refresh machine status</a>
                                     </li>
                                     <li><a href="#">Another action</a>
                                     </li>
@@ -40,6 +41,7 @@
                                 </ul>
                             </div>
                         </div>
+                        {% endif %}
                     </div>
                     <div class="panel-body">
                     <div class="dataTable_wrapper">

@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^mac/mac_delete$', common.method_splitter, {'GET': lhasa.mac_delete}, name='mac_delete'),
     url(r'^mac/mac_edit$', common.method_splitter, {'GET': lhasa.mac_edit}, name='mac_edit'),
     url(r'^macresult$', common.method_splitter, {'GET': lhasa.macresult}, name='macresult'),
+    url(r'^mac_status_refresh$', common.method_splitter, {'GET': lhasa.mac_status_refresh}, name='mac_status_refresh'),
 
     url(r'^midd-deploy/$', common.method_splitter, {'GET': lhasa.get_midd_deploy}, name='midd-deploy'),
     url(r'^midd_deploy_info$', lhasa.post_midd_deploy),

@@ -155,6 +155,7 @@
         linkk = "/restart_fz_shenqing"
         $.post(linkk, $("#form_restart").serialize(), function(data){
             $('#things').html(data);
+            location.reload()
         });
     });
 
@@ -166,6 +167,7 @@
         resid = $(this).attr("res_id");
         $.get('/restart_fz/restart', {resid:resid}, function(data){
             alert(data);
+            location.reload()
         });
     });
 

@@ -1,6 +1,6 @@
 # -*- encoding:utf-8 -*-
 
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.http import HttpResponse,HttpResponseRedirect
 
 
@@ -47,22 +47,49 @@ def mac(request):
     all_hosts = HostList.objects.all()
     return render(request, 'lhasa/mac.html', locals())
 
+@permission_required('tibet.add_hostlist', login_url='/')
 def mac_add(request):
     if request.method == 'GET':
         name = request.GET['name']
         ip = request.GET['ip']
-        restart_cmd = request.GET['restart_cmd']
-        service = request.GET['service']
+        restart_cmd = request.GET['recmd']
+        service = request.GET['ser']
         note = request.GET['note'] or ''
         macadd = HostList(ip=ip,hostname=name,service=service,restart_cmd=restart_cmd,note=note)
         macadd.save()
         return HttpResponse('ok')
 
+@permission_required('tibet.delete_hostlist', login_url='/')
 def mac_delete(request,id=None):
     if request.method == 'GET':
         id = request.GET.get('id')
         HostList.objects.filter(id=id).delete()
         return HttpResponseRedirect('/mac')
+
+@permission_required('tibet.can_operate_hostlist', login_url='/')
+def mac_edit(request,id=None):
+    if request.method == 'GET':
+        id = request.GET.get('id')
+    #all_idc = Idc.objects.all()
+    all_host=HostList.objects.filter(id=id)
+    return render_to_response("lhasa/mac_edit.html",locals())
+
+def macresult(request):
+    if request.method =='GET':
+        id2 = request.GET.get('id')
+        name = request.GET['name']
+        ip = request.GET['ip']
+        restart_cmd = request.GET['recmd']
+        service = request.GET['ser']
+        note = request.GET['note'] or ''
+        a = int(id2)
+        try:
+            mac_update = HostList.objects.filter(id=a).update(ip=ip,hostname=name,service=service,restart_cmd=restart_cmd,note=note)
+        except Exception as e:
+            print e
+            print "get exception"
+        finally:
+            return HttpResponse('ok')
 
 def restart_fz_shenqing(request):
     user = request.user

@@ -36,6 +36,12 @@ django 权限管理模块
 
 或者在 template中使用{% if perms.crashstats.can_view_url %}   {% endif %}
 
+@permission_required('tibet.add_hostlist', login_url='/')
+@permission_required('tibet.delete_hostlist', login_url='/')
+@permission_required('tibet.change_hostlist', login_url='/')
+@permission_required('tibet.can_operate_hostlist', login_url='/')
+{% if perms.tibet.can_operate_hostlist  %}{% endif %}
+
 
 
 

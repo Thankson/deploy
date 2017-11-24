@@ -61,6 +61,11 @@ class HostList(models.Model):
     def __unicode__(self):
         return self.ip
 
+    class Meta:
+        permissions = (
+            ('can_operate_hostlist', u'canoperatehostlist'),
+        )
+
 ### belows are salt_about
 class jids(models.Model):
     jid = models.CharField(max_length=255, unique=True)

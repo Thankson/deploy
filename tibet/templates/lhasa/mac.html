@@ -11,9 +11,11 @@
 {% block main %}
 
     <!-- 中间件服务 -->
+    {% if perms.tibet.can_operate_hostlist  %}
     <div class="row" style='margin-top:20px'>
         <button class="btn btn-default" id='addmacBtn' style='margin-left:20px'>添加机器（中间件机器）</button>
     </div>
+    {% endif %}
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default" style='margin-top:20px;'>
@@ -88,10 +90,12 @@
     <div class="modal fade" id='addmacModal'>
         <div class="modal-dialog">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">添加机器</h4>
                 </div>
+
                 <div class="modal-body">
                     <form class="form-horizontal"  method="post" action="/mac_add">
                         <div class="form-group">
@@ -117,9 +121,9 @@
                             <div class="col-sm-10">
                             <select id="ser"  class="form-control">
                                 <option value="midd">Middware_name</option>
-                                <option value="redis4s">redis4single</option>
-                                <option value="redis2s">redis2single</option>
-                                <option value="redis1s">redis1single</option>
+                                <option value="redis4s">redis4s</option>
+                                <option value="redis2s">redis2s</option>
+                                <option value="redis1s">redis1s</option>
                                 <option value="other">nginx,dubbo,nginx,mongo ... </option>
                             </select>
                           <!-- <input type="text" class="form-control" name='ip'> -->
@@ -135,7 +139,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary"  onclick="macadd(this)">确认</button>
+                    <button type="button" class="btn btn-primary"  onclick="macadd(this);">确认</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -239,15 +243,17 @@
             $('#addmacModal').modal('show')
         })
 
+        /*
         $(document).on('click','.deletemac',function(){
             var id = $(this).data('id')
-            $.get('/deletemac?id='+id,function(res){
+            alert(id);
+            $.get('/mac/mac_delete?id='+id,function(res){
                 if (res == 'ok') {
                     location.reload()
                 };
             })
         })
-
+        */
 
 
         function macadd(ele){
@@ -263,7 +269,7 @@
                 var id=$(ele).attr("id");
                 $.ajax({
                     url:"/mac_add",
-                    data:{name:$('#name').val(),ip:$('#ip').val(),restart_cmd:$('#recmd').val(),service:$('#ser').val(),note:$('#note').val()},
+                    data:{name:$('#name').val(),ip:$('#ip').val(),recmd:$('#recmd').val(),ser:$('#ser').val(),note:$('#note').val()},
 
                     success:function(data){
                         if (data=='ok') {

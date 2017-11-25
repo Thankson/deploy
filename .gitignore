@@ -1,3 +1,4 @@
-*.pyc
-tibet/migrations
+*.py[co]
+tibet/migrations/
 workspace.xml
+.idea/

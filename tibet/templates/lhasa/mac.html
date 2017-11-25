@@ -4,7 +4,11 @@
 
 {% block title %}fz_status{% endblock %}
 
-{% block css %}{% endblock %}
+{% block css %}
+
+
+
+{% endblock %}
 
 {% block module %}仿真机器状态{% endblock %}
 
@@ -24,12 +28,14 @@
                         {% if perms.tibet.can_operate_hostlist  %}
                         <div class="pull-right">
                             <div class="btn-group">
+                                <button id="service_status_refresh" class="btn btn-primary" type="button">获取服务最新状态</button>
+                                <!--
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                     Actions
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="/mac_status_refresh">refresh machine status</a>
+                                    <li><a href="javascript:" id="get_status">refresh machine status</a>
                                     </li>
                                     <li><a href="#">Another action</a>
                                     </li>
@@ -39,6 +45,7 @@
                                     <li><a href="#">Separated link</a>
                                     </li>
                                 </ul>
+                                -->
                             </div>
                         </div>
                         {% endif %}
@@ -64,7 +71,7 @@
                                     <td id="host_ip">{{all_host.ip}}</td>
                                     <td id="host">{{all_host.hostname}}</td>
                                     <td id="service">{{all_host.service}}</td>
-                                    <td id="restart_status"></td>
+                                    <td id="{{ all_host.id }}">{{ all_host.status_tmp }}</td>
                                     <td id="restart_cmd">{{all_host.restart_cmd}}</td>
                                     <td id="operator"></td>
                                     <td>
@@ -123,10 +130,11 @@
                             <div class="col-sm-10">
                             <select id="ser"  class="form-control">
                                 <option value="midd">Middware_name</option>
-                                <option value="redis4s">redis4s</option>
-                                <option value="redis2s">redis2s</option>
-                                <option value="redis1s">redis1s</option>
-                                <option value="other">nginx,dubbo,nginx,mongo ... </option>
+                                <option value="redis">redis</option>
+                                <option value="nginx">nginx</option>
+                                <option value="dubbo">dubbo</option>
+                                <option value="mongo">mongo</option>
+
                             </select>
                           <!-- <input type="text" class="form-control" name='ip'> -->
                             </div>
@@ -235,15 +243,21 @@
 
 {% block script %}
 
+
+
+   
+
     <script>
+
+
 
         $('#tipModal').on('hide.bs.modal',function(){
             location.reload()
-        })
+        });
 
         $('#addmacBtn').click(function(){
             $('#addmacModal').modal('show')
-        })
+        });
 
         /*
         $(document).on('click','.deletemac',function(){
@@ -276,10 +290,61 @@
                     success:function(data){
                         if (data=='ok') {
                             $('#tipModal').find('.modal-body').html('添加成功').end().modal('show')
+                        }else{
+                            $('#tipModal').find('.modal-body').html('添加失败').end().modal('show')
+                        }
                     }
-                }
-            });
+                });
         }}
+
+
+        // see : http://blog.csdn.net/ysy441088327/article/details/6311703      a 标签中调用js的几种方法
+        // & see :  http://www.cnblogs.com/fayin/p/6387044.html     $.ajax()——超时设置，增加 loading 提升体验
+
+
+        $('#service_status_refresh').click(function(){
+            $.getJSON('mac_status_refresh',function(data){
+                $.each(data,function(infoIndex,info){
+                    $("#"+info[0]).text(info[1]);
+                })
+            });
+        });
+
+/*
+        getAjax: function (method, apiUrl, options, callback) {
+                alert("hell");
+                var xhr = $.ajax({
+                    type: method,
+                    url: "mac_status_refresh",
+                    data: options,
+                    timeout: 5000,          // 设置超时时间
+                    dataType: "json",
+                    beforeSend: function (xhr) {
+                        $.showLoading();    // 数据加载成功之前，使用loading组件
+                    },
+                    success: function(json) {
+                        $.hideLoading();    // 成功后，隐藏loading组件
+                        if(callback && callback instanceof Function === "true") {
+                            callback(json);
+                        }
+                    },
+                    error: function (textStatus) {
+                        console.error(textStatus);
+                    },
+                    complete: function (XMLHttpRequest,status) {
+                        if(status == 'timeout') {
+                            xhr.abort();    // 超时后中断请求
+                            $.alert("网络超时，请刷新", function () {
+                                location.reload();
+                            })
+                        }
+                    }
+                })
+            }
+
+        $("#service_status_refresh").js_method();
+*/
+
         </script>
 
 

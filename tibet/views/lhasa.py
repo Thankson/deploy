@@ -10,9 +10,9 @@ from tibet.tools.salt_api_client import restart_job_vir_salt
 from tibet.tools.utils import clean_data, single_list
 from tibet.tools.salt_http_api_async import SaltApi, salt_api
 
-from tibet.models import RestartJobs, MiddwearDeploy, HostList
+from tibet.models import RestartJobs, MiddwearDeploy, HostList, HostServiceStatus
 
-import datetime
+import datetime, json
 
 from django.contrib.auth.decorators import permission_required,login_required
 
@@ -43,8 +43,9 @@ def restart_fz(request):
     print get_all_restart
     return render(request, 'lhasa/restart_fz.html', locals())
 
-@login_required
+#@login_required
 def mac(request):
+    user = request.user
     all_hosts = HostList.objects.all()
     return render(request, 'lhasa/mac.html', locals())
 
@@ -56,9 +57,13 @@ def mac_add(request):
         restart_cmd = request.GET['recmd']
         service = request.GET['ser']
         note = request.GET['note'] or ''
-        macadd = HostList(ip=ip,hostname=name,service=service,restart_cmd=restart_cmd,note=note)
-        macadd.save()
-        return HttpResponse('ok')
+        try:
+            macadd = HostList(ip=ip,hostname=name,service=service,restart_cmd=restart_cmd,note=note)
+            macadd.save()
+        except Exception as e:
+            return HttpResponse('fail')
+        else:
+            return HttpResponse('ok')
 
 @permission_required('tibet.delete_hostlist', login_url='/')
 def mac_delete(request,id=None):
@@ -67,8 +72,10 @@ def mac_delete(request,id=None):
         HostList.objects.filter(id=id).delete()
         return HttpResponseRedirect('/mac')
 
-@permission_required('tibet.can_operate_hostlist', login_url='/')
+@permission_required('tibet.change_hostlist', login_url='/')
 def mac_edit(request,id=None):
+    # user = request.user 这一句很关键，要不然html文件中找不到头像和用户的基本信息了
+    user = request.user
     if request.method == 'GET':
         id = request.GET.get('id')
     #all_idc = Idc.objects.all()
@@ -85,16 +92,74 @@ def macresult(request):
         note = request.GET['note'] or ''
         a = int(id2)
         try:
-            mac_update = HostList.objects.filter(id=a).update(ip=ip,hostname=name,service=service,restart_cmd=restart_cmd,note=note)
+            HostList.objects.filter(id=a).update(ip=ip,hostname=name,service=service,restart_cmd=restart_cmd,note=note)
         except Exception as e:
             print e
             print "get exception"
-        finally:
+            return HttpResponse('fail')
+        else:
             return HttpResponse('ok')
 
+        # finally:
+        #     return HttpResponse('ok')
+
 def mac_status_refresh(request):
-    #pass
-    return render(request, 'lhasa/testt.html', locals())
+    try:
+        target = HostList.objects.values_list('hostname','service')
+    except Exception as e:
+        print e
+        print "get exception"
+        return HttpResponse('fail')
+
+    salt_client = ','.join([a[0] for a in target])
+    #target =
+    try:
+        salt1 = SaltApi(salt_api)
+    except Exception as e:
+        print e
+        inf = 'ret code 4'
+        print 'ret code 4'
+        return HttpResponse(inf)
+
+    salt_method = 'cmd.run'
+    # project = 'tntnt222'
+    # salt_params = '/opt/deploy.sh %s' % project
+    salt_params = 'bash /opt/chk_service_status.sh'
+    try:
+        result = salt1.salt_command_list(salt_client, salt_method, salt_params)
+        print "result"
+        print result
+        print 'resultend'
+        # result1 = salt1.look_jid(jid1)
+        # for i in result1.keys():
+        #     print i
+        #     print result1[i]
+    except Exception as e:
+        print e
+        inf = 'ret code 3'
+        print 'ret code 3'
+        return HttpResponse(inf)
+    for tar in target:
+        print tar[1]
+        print tar[0]
+        if tar[0] in result:
+            if not result[tar[0]]:
+                HostList.objects.filter(hostname=tar[0]).update(status_tmp='down')
+                HostServiceStatus.objects.create(status='down')
+                continue
+            if tar[1] in result[tar[0]]:
+                HostList.objects.filter(hostname=tar[0]).filter(service=tar[1]).update(status_tmp='on')
+            else:
+                HostList.objects.filter(hostname=tar[0]).filter(service=tar[1]).update(status_tmp='down')
+        else:
+            HostList.objects.filter(hostname=tar[0]).update(status_tmp='notAMinion')
+
+    status = HostList.objects.values_list('id', 'status_tmp')
+    print status[0][1]
+    ret = list(status)
+    ret2 = json.dumps(ret)
+    print ret2
+    return HttpResponse(ret2)
 
 def restart_fz_shenqing(request):
     user = request.user

@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}Index{% endblock %}
+{% block title %}mac_edit{% endblock %}
 
 {% block css %}{% endblock %}
 
@@ -27,7 +27,7 @@
                         <div class="panel-body">
 
                             <div style="width:50%">
-                                <form class="form-horizontal"  method="post" action="/macresult">
+                                <form class="form-horizontal"  method="post" action="/">
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">机器名</label>
                                         <div class="col-sm-10">
@@ -51,10 +51,10 @@
                                         <div class="col-sm-10">
                                         <select id="ser"  class="form-control" value="{{ all_host.service }}">
                                             <option value="{{ all_host.service }}">{{ all_host.service }}</option>
-                                            <option value="redis4s">redis4s</option>
-                                            <option value="redis2s">redis2s</option>
-                                            <option value="redis1s">redis1s</option>
-                                            <option value="other">nginx,dubbo,nginx,mongo ... </option>
+                                            <option value="redis">redis</option>
+                                            <option value="nginx">nginx</option>
+                                            <option value="dubbo">dubbo</option>
+                                            <option value="mongo">mongo</option>
                                         </select>
                                       <!-- <input type="text" class="form-control" name='ip'> -->
                                         </div>
@@ -122,14 +122,20 @@
                    data:{name:$('#name').val(),ip:$('#ip').val(),recmd:$('#recmd').val(),ser:$('#ser').val(),note:$('#note').val()},
                    success:function(data){
                        if (data=='ok') {
-                           $('#tipModal').find('.modal-body').html('修改成功').end().modal('show')
+                           //$('#tipModal').find('.modal-body').html('修改成功').end().modal('show');
+                           alert('修改成功');
                            $(location).attr('href', '/mac');
+                           //location.href='/mac'
                            //$(window).attr('location','/mac');
                            //$(location).prop('href', '/mac');
+                       }else{
+                           $('#tipModal').find('.modal-body').html('修改失败，请检查后继续修改').end().modal('show');
+                           //alert('修改失败');
+                           //$(location).attr('href', '/mac');
+                       }
                    }
-               }
-           });
-        }}
+               });
+           }}
     </script>
 
 {% endblock %}

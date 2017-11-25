@@ -57,6 +57,7 @@ class HostList(models.Model):
     hostname = models.CharField(max_length=30, null=True, blank=True)
     service = models.CharField(max_length=20, null=True, blank=True)
     restart_cmd = models.CharField(max_length=128, null=True, blank=True)
+    status_tmp = models.CharField(max_length=30, null=True, blank=True)
     note = models.CharField(max_length=128,null=True,blank=True)
     def __unicode__(self):
         return self.ip
@@ -65,6 +66,12 @@ class HostList(models.Model):
         permissions = (
             ('can_operate_hostlist', u'canoperatehostlist'),
         )
+        unique_together = ('hostname', 'service')
+
+class HostServiceStatus(models.Model):
+    hl = models.ForeignKey(HostList, null=True, blank=True)
+    status = models.CharField(max_length=30, null=True, blank=True)
+    refreshtime = models.DateTimeField(auto_now=True)
 
 ### belows are salt_about
 class jids(models.Model):

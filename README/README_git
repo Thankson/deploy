@@ -1,0 +1,14 @@
+http://blog.csdn.net/yangcs2009/article/details/47166361    使用git rebase合并多次commit
+目的：将多次commit合并，只保留一次提交历史。
+步骤：
+1.首先使用git log查看一下提交历史
+	需要做的是将4次commit合并为一次
+2. git 压缩  git rebase -i HEAD~4
+	该命令执行后，会弹出一个编辑窗口，4次提交的commit倒序排列，最上面的是最早的提交，最下面的是最近一次提交
+	修改第2-4行的第一个单词pick为squash，当然看一下里面的注释就理解含义了。
+	然后保存退出，git会压缩提交历史，如果有冲突，需要修改，修改的时候要注意，保留最新的历史，不然我们的修改就丢弃了。修改以后要记得敲下面的命令：
+		git add .
+		git rebase --continue
+	如果你想放弃这次压缩的话，执行以下命令：
+		git rebase --abort
+	如果没有冲突，或者冲突已经解决，则会出现编辑窗口

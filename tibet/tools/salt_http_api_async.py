@@ -61,7 +61,27 @@ class SaltApi:
             params = {'client': 'local', 'fun': method, 'tgt': tgt, 'arg': arg}
         else:
             params = {'client': 'local', 'fun': method, 'tgt': tgt}
-        print '命令参数: ', params
+        #print '命令参数: ', params
+        result = self.get_data(self.url, params)
+        return result
+
+    def salt_command_list(self, tgt, method, arg=None):
+        """远程执行命令，相当于salt 'client1' cmd.run 'free -m'"""
+        if arg:
+            params = {'client': 'local','expr_form': 'list', 'fun': method, 'tgt': tgt, 'arg': arg}
+        else:
+            params = {'client': 'local','expr_form': 'list', 'fun': method, 'tgt': tgt}
+        #print '命令参数: ', params
+        result = self.get_data(self.url, params)
+        return result
+
+    def salt_command_nodegroup(self, tgt, method, arg=None):
+        """远程执行命令，相当于salt 'client1' cmd.run 'free -m'"""
+        if arg:
+            params = {'client': 'local','expr_form': 'nodegroup', 'fun': method, 'tgt': tgt, 'arg': arg}
+        else:
+            params = {'client': 'local','expr_form': 'nodegroup', 'fun': method, 'tgt': tgt}
+        #print '命令参数: ', params
         result = self.get_data(self.url, params)
         return result
 

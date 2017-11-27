@@ -20,6 +20,9 @@
 
     <div id="ok"></div>
 
+    <input type="button" id="load" onclick="load();" value="点击加载"/>
+    <div id="tips"></div>
+
 {% endblock %}
 
 {% block script %}
@@ -44,24 +47,50 @@
         })
       })
     })
-    </script>
 
 
-    <script>
+
+
+
+
     $(function(){
-    $.getJSON("serverstatus_test",function(data){
-    var $jsontip = $("#ok");
-    var strHtml = "";//存储数据的变量
-    $jsontip.empty();//清空内容
-        alert('aaaaaa');
-        alert(data[0].url);
-    $.each(data,function(infoIndex,info){
-        //alert(info['url']);
-        strHtml += "<a href='" + info["url"] + "' target='_blank'><img src='" + info["img"] + "' /></a>";
+        $.getJSON("serverstatus_test",function(data){
+        var $jsontip = $("#ok");
+        var strHtml = "";//存储数据的变量
+        $jsontip.empty();//清空内容
+            alert('aaaaaa');
+            //alert(data[0].url);
+        $.each(data,function(infoIndex,info){
+            //alert(info['url']);
+            strHtml += "<a href='" + info["url"] + "' target='_blank'><img src='" + info["img"] + "' /></a>";
+        })
+        $jsontip.html(strHtml);//显示处理后的数据
+        })
     })
-    $jsontip.html(strHtml);//显示处理后的数据
-    })
-    })
+
+
+
+    function load(){
+        $("#tips").html("加载中...");
+        $.ajax({
+          async:true,
+          cache:false,
+          timeout:1000,
+          type:"GET",
+          url:"testt33",
+          data:{a:'123'},
+          error:function(jqXHR, textStatus, errorThrown){
+            if(textStatus=="timeout"){
+              $("#tips").html("加载超时，请重试");
+            }else{
+              alert(textStatus);
+            }
+          },
+          success:function(msg){
+            $("#tips").html(msg);
+          }
+        });
+      }
     </script>
 {% endblock %}
 

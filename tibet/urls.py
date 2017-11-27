@@ -31,6 +31,9 @@ urlpatterns = [
     url(r'^midd_deploy_info$', lhasa.post_midd_deploy),
 
     url(r'^testt$', lhasa.testt),
+    url(r'^testt2$', lhasa.testt2),
+    url(r'^testt3$', lhasa.testt3),
+    url(r'^testt33$', lhasa.testt33),
 
     #################################################################
     # json urls

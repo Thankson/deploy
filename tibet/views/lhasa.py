@@ -12,7 +12,7 @@ from tibet.tools.salt_http_api_async import SaltApi, salt_api
 
 from tibet.models import RestartJobs, MiddwearDeploy, HostList, HostServiceStatus
 
-import datetime, json
+import datetime, json, time
 
 from django.contrib.auth.decorators import permission_required,login_required
 
@@ -127,9 +127,9 @@ def mac_status_refresh(request):
     salt_params = 'bash /opt/chk_service_status.sh'
     try:
         result = salt1.salt_command_list(salt_client, salt_method, salt_params)
-        print "result"
-        print result
-        print 'resultend'
+        # print "result"
+        # print result
+        # print 'resultend'
         # result1 = salt1.look_jid(jid1)
         # for i in result1.keys():
         #     print i
@@ -140,8 +140,8 @@ def mac_status_refresh(request):
         print 'ret code 3'
         return HttpResponse(inf)
     for tar in target:
-        print tar[1]
-        print tar[0]
+        # print tar[1]
+        # print tar[0]
         if tar[0] in result:
             if not result[tar[0]]:
                 HostList.objects.filter(hostname=tar[0]).update(status_tmp='down')
@@ -303,3 +303,13 @@ def post_midd_deploy(request):
 def testt(request):
     return render(request, 'lhasa/testt.html', locals())
 
+def testt2(request):
+    return render(request, 'lhasa/testt2.html', locals())
+
+def testt3(request):
+    return render(request, 'lhasa/testt3.html', locals())
+
+def testt33(request):
+    time.sleep(1)
+    print '111222'
+    return HttpResponse('inf')

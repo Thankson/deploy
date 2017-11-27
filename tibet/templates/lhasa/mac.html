@@ -28,8 +28,11 @@
                         {% if perms.tibet.can_operate_hostlist  %}
                         <div class="pull-right">
                             <div class="btn-group">
-                                <button id="service_status_refresh" class="btn btn-primary" type="button">获取服务最新状态</button>
+                                <input type="button" id="load" onclick="load();" value="点击加载"/>
+                                <div id="tips"></div>
                                 <!--
+                                <button id="service_status_refresh" class="btn btn-primary" type="button">获取服务最新状态</button>
+
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                     Actions
                                     <span class="caret"></span>
@@ -302,6 +305,7 @@
         // & see :  http://www.cnblogs.com/fayin/p/6387044.html     $.ajax()——超时设置，增加 loading 提升体验
 
 
+        /*
         $('#service_status_refresh').click(function(){
             $.getJSON('mac_status_refresh',function(data){
                 $.each(data,function(infoIndex,info){
@@ -309,6 +313,34 @@
                 })
             });
         });
+        */
+
+        function load(){
+            $("#tips").html("加载中...");
+            $.ajax({
+                async:true,
+                cache:false,
+                timeout:20000,
+                type:"GET",
+                dataType: "json",
+                url:"mac_status_refresh",
+                data:{a:'123'},
+
+                error:function(jqXHR, textStatus, errorThrown){
+                    if(textStatus=="timeout"){
+                        $("#tips").html("加载超时，请重试");
+                    }else{
+                        alert(textStatus);
+                    }
+                },
+                success:function(msg){
+                    $.each(msg,function(infoIndex,info){
+                        $("#"+info[0]).text(info[1]);
+                    })
+                    $("#tips").html("加载成功");
+                }
+            });
+          }
 
 /*
         getAjax: function (method, apiUrl, options, callback) {

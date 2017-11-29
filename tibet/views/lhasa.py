@@ -155,10 +155,10 @@ def mac_status_refresh(request):
             HostList.objects.filter(hostname=tar[0]).update(status_tmp='notAMinion')
 
     status = HostList.objects.values_list('id', 'status_tmp')
-    print status[0][1]
+    #print status[0][1]
     ret = list(status)
     ret2 = json.dumps(ret)
-    print ret2
+    #print ret2
     return HttpResponse(ret2)
 
 def restart_fz_shenqing(request):

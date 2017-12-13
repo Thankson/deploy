@@ -9,6 +9,7 @@ from tibet.tools.salt_api import saltCmd
 from tibet.tools.salt_api_client import restart_job_vir_salt
 from tibet.tools.utils import clean_data, single_list
 from tibet.tools.salt_http_api_async import SaltApi, salt_api
+from tibet.tools.restart_tomcat_vir_salt import start
 
 from tibet.models import RestartJobs, MiddwearDeploy, HostList, HostServiceStatus
 
@@ -193,48 +194,13 @@ def restart_fz_r(request):
             lt = RestartJobs.objects.get(id=int(resid))
             projects = lt.projects
             projects_list = projects.split(",")
+            print projects_list
+            start(projects_list)
 
-            with open("tomcat-quanfangzhen.txt") as f:
-                lines = f.readlines()
-            jids = []
-            restarted_job = []
-            try:
-                salt1 = SaltApi(salt_api)
-            except Exception as e:
-                print e
-                inf = 'ret code 2'
-                print 'ret code 2'
-                return HttpResponse(inf)
-            for project in projects_list:
-                target = ""
-                for line in lines:
-                    if project == line.split()[0]:
-                        target = line.split()[1]
-                        # jid = local.cmd_async(target, 'cmd.run', ['/opt/deploy.sh %s'%project])
-                        salt_client = target
-                        salt_method = 'cmd.run'
-                        salt_params = '/opt/deploy.sh %s' % project
-                        try:
-                            jid1 = salt1.salt_async_command(salt_client, salt_method, salt_params)
-                            # result1 = salt1.look_jid(jid1)
-                            # for i in result1.keys():
-                            #     print i
-                            #     print result1[i]
-                        except Exception as e:
-                            print e
-                            inf = 'ret code 3'
-                            print 'ret code 3'
-                            return HttpResponse(inf)
-                        #jid = local.cmd_async(target, 'cmd.run', ['/opt/deploy.sh %s' % project])
-                        jids.append(jid1)
-                        restarted_job.append('{%s => %s}'%(target, project))
-            #jids = restart_job_vir_salt(projects_list)
-
-            #jobname = restart_job_vir_jenkins(projects)
             cus = RestartJobs.objects.filter(id=int(resid)).update(restarttime=time, operator=username)
             #lt2 = RestartJobs.objects.get(id=int(resid))
             #restarttime = lt2.restarttime.strftime("%Y-%m-%d %H:%M:%S")
-            return HttpResponse(restarted_job)
+            return HttpResponse('restarted_job')
         else:
             return HttpResponse('restart failed!')
 

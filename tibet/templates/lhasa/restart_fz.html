@@ -77,7 +77,16 @@
                                 <button type="button" class="btn btn-success btn-circle"><i class="fa fa-check"></i></button>&nbsp{{ res.operator }}&nbsp已通过<strong class="text-success" title="{{ res.projects }}" tooltips="{{ res.projects }}"> &nbsp{{ res.projects | project_process }}&nbsp 等</strong>
                                 <span class="pull-right text-muted small">&nbsp&nbsp<em>{{ res.restarttime | pretty_date }}</em></span>
                             {% else %}
-                                <button type="button" class="btn btn-default btn-circle" id="restart_btn" res_id="{{ res.id }}"><i class="fa fa-link"></i></button>&nbsp{{ res.applicant }} &nbsp申请重启&nbsp<strong class="text-muted" title="{{ res.projects }}" tooltips="{{ res.projects }}"> {{ res.projects | project_process }} &nbsp 等</strong>
+                                {% if perms.tibet.can_operate_hostlist  %}
+                                    <button type="button" class="btn btn-default btn-circle" id="{{ res.id }}" res_id="{{ res.id }}" onclick="test(this.id)">
+                                        <i class="fa fa-link"></i>
+                                    </button>
+                                {% else %}
+                                    <button type="button" class="btn btn-default btn-circle">
+                                        <i class="fa fa-link"></i>
+                                    </button>
+                                {% endif %}
+                                &nbsp{{ res.applicant }} &nbsp申请重启&nbsp<strong class="text-muted" title="{{ res.projects }}" tooltips="{{ res.projects }}"> {{ res.projects | project_process }} &nbsp 等</strong>
                                 <span class="pull-right text-muted small">&nbsp&nbsp<em>{{ res.applitime | pretty_date }}</em></span>
                             {% endif %}
                             </a>
@@ -159,10 +168,19 @@
         });
     });
 
+    function test(id) {
+        var resid;
+            //resid = $(this).attr("res_id");
+            resid = id
+            $.get('/restart_fz/restart', {resid:resid}, function(data){
+                alert(data);
+                location.reload()
+            });
+    }
 
 
 
-    $('#restart_btn').click(function(){
+    /* $('#restart_btn').click(function(){
         var resid;
         resid = $(this).attr("res_id");
         $.get('/restart_fz/restart', {resid:resid}, function(data){
@@ -172,7 +190,7 @@
     });
 
 
-/*
+
 方法一:
 参考: http://www.lanrenzhijia.com/jquery/2822.html
     $.fn.extend({
